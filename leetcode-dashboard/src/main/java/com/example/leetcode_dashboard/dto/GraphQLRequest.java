@@ -11,6 +11,11 @@ public class GraphQLRequest {
         this.variables = variables;
     }
 
+    public GraphQLRequest(String query) {
+        this.query = query;
+        this.variables =Map.of();
+    }
+
     public String getQuery() {
         return query;
     }
