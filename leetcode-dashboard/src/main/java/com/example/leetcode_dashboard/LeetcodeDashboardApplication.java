@@ -2,8 +2,7 @@ package com.example.leetcode_dashboard;
 
 import com.example.leetcode_dashboard.Service.LeetCodeClient;
 import com.example.leetcode_dashboard.component.DailyProblemHolder;
-import com.example.leetcode_dashboard.model.LeetCodeProblem;
-import com.example.leetcode_dashboard.repository.LeetCodeProblemRepository;
+import com.example.leetcode_dashboard.dto.QuestionTransferDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,12 +13,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class LeetcodeDashboardApplication implements CommandLineRunner {
 
+
 	@Autowired
 	LeetCodeClient  leetCodeClient;
 	@Autowired
-	LeetCodeProblemRepository leetCodeProblemRepository;
-	@Autowired
-	DailyProblemHolder  dailyProblemHolder;
+	DailyProblemHolder dailyProblemHolder;
 
 
 	static void main(String[] args) {
@@ -27,14 +25,9 @@ public class LeetcodeDashboardApplication implements CommandLineRunner {
 	}
 
 
-
 	@Override
 	public void run(String... args) throws Exception {
-	LeetCodeProblem dailyQuestion=leetCodeClient.getProblemoftheDay_Schedular();
-	if(leetCodeProblemRepository.findByProblemId(dailyQuestion.getProblemId()) == null){
-		dailyQuestion=leetCodeProblemRepository.save(dailyQuestion);
-	}
-	dailyProblemHolder.setLeetCodeProblem(dailyQuestion.getQuestion());
-
+		QuestionTransferDTO questionTransferDTO=leetCodeClient.getProblemoftheDay();
+		dailyProblemHolder.setCurrentProblem(questionTransferDTO);
 	}
 }

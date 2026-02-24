@@ -10,5 +10,4 @@ public interface LeetCodeProblemRepository extends JpaRepository<LeetCodeProblem
 
     LeetCodeProblem findByProblemId(int problemID);
     LeetCodeProblem findByTitleSlug(String titleSlug);
-    LeetCodeProblem findByDate(String date);
 }

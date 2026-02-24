@@ -13,9 +13,7 @@ import java.util.List;
 @Builder
 public class QuestionTransferDTO {
     private String date;
-
     private int problemId;
-
     private String title;
     private String titleSlug;
     private String difficulty;
@@ -28,21 +26,6 @@ public class QuestionTransferDTO {
     private List<String> hints;
     private List<String> topicTags;
 
-    public LeetCodeProblem getSolvedProblem() {
-        return LeetCodeProblem.builder()
-                .problemId(problemId)
-                .title(title)
-                .content(content)
-                .date(date)
-                .difficulty(difficulty)
-                .titleSlug(titleSlug)
-                .hints(hints)
-                .topicTags(topicTags)
-                .acceptanceRate(acceptanceRate)
-                .totalSubmissionRaw(totalSubmissionRaw)
-                .totalAcceptedRaw(totalAcceptedRaw)
-                .build();
 
-    }
 
 }

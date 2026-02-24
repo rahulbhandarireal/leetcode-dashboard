@@ -16,23 +16,11 @@ public class UserStatsResponse {
     private int easySolved;
     private int mediumSolved;
     private int hardSolved;
-    private int totalSubmit;
     private int totalActiveDays;
     private String rating;
     private int streak;
 
-    public Student getStudent() {
-        return  Student.builder()
-                .username(username)
-                .easy(easySolved)
-                .medium(mediumSolved)
-                .hard(hardSolved)
-                .totalSolved(totalSolved)
-                .streak(streak)
-                .totalActiveDays(totalActiveDays)
-                .rating(rating)
-                .build();
-    }
+
 
 
 }

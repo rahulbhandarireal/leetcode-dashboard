@@ -4,6 +4,7 @@ import com.example.leetcode_dashboard.dto.QuestionTransferDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,13 +15,12 @@ import java.util.List;
 @Builder
 public class LeetCodeProblem {
 
-    private String date;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private int problemId;
 
     private String title;
@@ -37,6 +37,10 @@ public class LeetCodeProblem {
 
     private List<String> hints;
     private List<String> topicTags;
+//    removing the bidirectional mapping
+//    @OneToMany(mappedBy = "problem", cascade = CascadeType.ALL,
+//            orphanRemoval = true,fetch = FetchType.LAZY)
+//    private List<SolvedProblem> solvedProblems = new ArrayList<>();
 
     public QuestionTransferDTO getQuestion(){
         return  QuestionTransferDTO.builder()
@@ -50,7 +54,6 @@ public class LeetCodeProblem {
                 .acceptanceRate(acceptanceRate)
                 .hints(hints)
                 .topicTags(topicTags)
-                .date(date)
                 .build();
     }
 

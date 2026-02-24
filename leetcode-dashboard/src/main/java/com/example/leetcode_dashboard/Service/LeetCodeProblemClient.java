@@ -10,16 +10,8 @@ public class LeetCodeProblemClient {
     @Autowired
     private WebClient webClient;
 
-
-
     public LeetCodeProblemClient(WebClient webClient) {
         this.webClient = webClient;
     }
-
-    
-
-
-
-
 
 }

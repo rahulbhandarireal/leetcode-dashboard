@@ -5,9 +5,12 @@ import com.example.leetcode_dashboard.dto.GraphQLRequest;
 import com.example.leetcode_dashboard.dto.QuestionTransferDTO;
 import com.example.leetcode_dashboard.dto.UserStatsResponse;
 import com.example.leetcode_dashboard.model.LeetCodeProblem;
+import com.example.leetcode_dashboard.model.SolvedProblem;
 import com.example.leetcode_dashboard.model.Student;
 import com.example.leetcode_dashboard.repository.LeetCodeProblemRepository;
+import com.example.leetcode_dashboard.repository.SolvedProblemRepository;
 import com.example.leetcode_dashboard.repository.StudentRepository;
+import jakarta.transaction.Transactional;
 import org.antlr.v4.runtime.misc.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +23,7 @@ import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Year;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -29,7 +33,8 @@ import java.util.stream.StreamSupport;
 @Service
 public class LeetCodeClient {
 
-  private final WebClient webClient;
+    @Autowired
+  private  WebClient webClient;
   private final ObjectMapper objectMapper = new ObjectMapper();
   Logger log = LoggerFactory.getLogger(LeetCodeClient.class);
 
@@ -38,18 +43,18 @@ public class LeetCodeClient {
 
   @Autowired
   LeetCodeProblemRepository leetCodeProblemRepository;
-
   @Autowired
-  private  DailyProblemHolder holder;
+    DailyProblemHolder dailyProblemHolder;
+    @Autowired
+    private SolvedProblemRepository solvedProblemRepository;
 
-  public LeetCodeClient(WebClient webClient) {
-    this.webClient = webClient;
-  }
 
-  public Student getUserStats(String username) {
+
+
+  public UserStatsResponse getUserStats(String username) {
       Student student  = studentRepository.findByUsername(username);
     if (student != null)
-      return student;
+      return student.getUserStats();
 
       String userstatsquery = """
              query userProfile($username: String!) {
@@ -135,19 +140,20 @@ public class LeetCodeClient {
         }
       }
 
-          UserStatsResponse userStatsResponse = UserStatsResponse.builder()
+           student = Student.builder()
               .username(username)
-              .easySolved(easy)
-              .hardSolved(hard)
-              .mediumSolved(medium)
+                   .easy(easy)
+              .hard(hard)
+              .medium(medium)
                   .rating(rank)
                   .streak(streakTotal.a)
                   .totalActiveDays(streakTotal.b)
               .totalSolved(total)
               .build();
 
-      student = userStatsResponse.getStudent();
-      return studentRepository.save(student);
+
+      student=studentRepository.save(student);
+      return student.getUserStats();
 
     } catch (Exception e) {
 
@@ -184,8 +190,11 @@ public class LeetCodeClient {
       return new Pair<>(streak,totalActivedays);
   }
 
-  public List<LeetCodeProblem> getRecentSolvedProblems(String username) {
-      List<LeetCodeProblem> recentProblems=new ArrayList<>();
+  @Transactional
+  public List<QuestionTransferDTO> getRecentSolvedProblems(String username) {
+      Student student=studentRepository.findByUsername(username);
+      if(student==null) {throw new RuntimeException("User not found on LeetDecode Database");}
+      List<QuestionTransferDTO> recentProblems=new ArrayList<>();
     String query = """
     query recentSubmissions($username: String!) {
         recentSubmissionList(username: $username) {
@@ -212,7 +221,7 @@ public class LeetCodeClient {
     try {
       JsonNode root = objectMapper.readTree(rawJson);
       JsonNode userNode = root.path("data").path("recentSubmissionList");
-      if (userNode.isMissingNode() || userNode == null) throw new RuntimeException("User not found on LeetCode");
+      if (userNode.isMissingNode()) throw new RuntimeException("User not found on LeetCode");
 
       String questiontopicquery= """
               query questionDetails($titleSlug: String!) {
@@ -232,6 +241,8 @@ public class LeetCodeClient {
               """;
       for(JsonNode submission : userNode) {
         String titleSlug = submission.path("titleSlug").asString();
+        String statusDisplay = submission.path("statusDisplay").asString();
+        if(!statusDisplay.equals("Accepted")) {continue;}
         GraphQLRequest recenreq=new GraphQLRequest(questiontopicquery,
                 Map.of("titleSlug", titleSlug));
         String rawjson = webClient.post()
@@ -240,45 +251,108 @@ public class LeetCodeClient {
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
-
-        String date=LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         JsonNode node = objectMapper.readTree(rawjson).path("data");
         JsonNode question = node.path("question");
         Integer problemID = question.path("questionFrontendId").asInt();
-        Optional<LeetCodeProblem> problem;
-        problem = Optional.ofNullable(leetCodeProblemRepository.findByProblemId(problemID));
+        LeetCodeProblem problem;
+        problem = leetCodeProblemRepository.findByProblemId(problemID);
+        LocalDateTime date=LocalDateTime.now();
 
-        if (problem.isPresent()) {
-            continue;
+        if (problem == null) {
+            problem=  makeQuestion(question);
+            problem=leetCodeProblemRepository.save(problem);
+            recentProblems.add(problem.getQuestion());
         }
-        LeetCodeProblem qu=  makeQuestion(question,date).getSolvedProblem();
-       recentProblems.add(qu);
-       leetCodeProblemRepository.save(qu);
+        Optional<SolvedProblem> osp=solvedProblemRepository.existsByStudent_UsernameAndProblem_ProblemId(username,problemID);
+
+        if(!osp.isPresent()) {
+            SolvedProblem sp=new SolvedProblem();
+            sp.setProblem(problem);
+            sp.setStudent(student);
+            sp.setSolvedAt(date);
+            student.getSolvedProblems().add(sp);
+            solvedProblemRepository.save(sp);
+        }else{
+            SolvedProblem sp=osp.get();
+            sp.setSolvedAt(date);
+        }
       }
-
-
-
-
     }catch (Exception e){
-      throw new RuntimeException("Failed to parse LeetCode response", e);
+      throw new RuntimeException(STR."Failed to parse LeetCode response  reason: \{e.getMessage()}");
     }
     return recentProblems;
   }
 
   public QuestionTransferDTO getProblemoftheDay(){
-     QuestionTransferDTO leetCodeProblem= holder.getLeetCodeProblem();
-
-     return  leetCodeProblem;
-  }
-
-  public LeetCodeProblem getProblemoftheDay_Schedular() {
-    LocalDate today = LocalDate.parse(LocalDate.now(ZoneOffset.UTC).toString());
-    String date = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
       String query = """
         query questionOfToday {
           activeDailyCodingChallengeQuestion {
             date
-            link
+            question {
+            questionFrontendId
+            }
+           }
+          }
+          """;
+      GraphQLRequest graphQLRequest=new GraphQLRequest(query);
+      String rawjson = webClient.post()
+              .uri("/graphql")
+              .bodyValue(graphQLRequest)
+              .retrieve()
+              .bodyToMono(String.class)
+              .block();
+      JsonNode root = objectMapper.readTree(rawjson);
+      int problemId=root.path("data").path("activeDailyCodingChallengeQuestion")
+              .path("question").path("questionFrontendId").asInt();
+      LeetCodeProblem problem=leetCodeProblemRepository.findByProblemId(problemId);
+      if(problem==null){
+          return getProblemoftheDay_Schedular();
+      }else{
+          return problem.getQuestion();
+      }
+  }
+
+    public String isPOTDSolved(String username){
+      QuestionTransferDTO dailypotd=dailyProblemHolder.getCurrentProblem();
+        String query= """
+              query recentSubmissions($username: String!) {
+                recentSubmissionList(username: $username) {
+                  titleSlug
+                  statusDisplay
+                }
+              }
+              """;
+        GraphQLRequest request = new GraphQLRequest(query,Map.of("username",username));
+
+        String rawjson = webClient.post()
+                .uri("/graphql")
+                .bodyValue(request)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        try {
+            JsonNode root = objectMapper.readTree(rawjson).path("data").path("recentSubmissionList");
+            for (JsonNode submission : root) {
+                String titleSlug = submission.path("titleSlug").asString();
+                String statusDisplay= submission.path("statusDisplay").asString();
+                if(!statusDisplay.equals("Accepted"))continue;
+                if (titleSlug.equals(dailyProblemHolder.getCurrentProblem().getTitleSlug())) {
+                    return "solved";
+                }
+            }
+        }catch (Exception e){
+            log.info("Failed to parse LeetCode response - {}",e.getMessage());
+        }
+        return "not solved";
+
+    }
+
+    public QuestionTransferDTO getProblemoftheDay_Schedular() {
+    LocalDate today = LocalDate.parse(LocalDate.now(ZoneOffset.UTC).toString());
+      String query = """
+        query questionOfToday {
+          activeDailyCodingChallengeQuestion {
             question {
             questionFrontendId
               title
@@ -306,57 +380,24 @@ public class LeetCodeClient {
 
       log.info(rawjson);
       JsonNode root = objectMapper.readTree(rawjson).path("data");
-      date = root.path("activeDailyCodingChallengeQuestion").path("date").asString();
       JsonNode questionNode = root.path("activeDailyCodingChallengeQuestion").path("question");
-      LeetCodeProblem question= makeQuestion(questionNode,date).getSolvedProblem();
-      return question;
+      LeetCodeProblem leetCodeProblem = makeQuestion(questionNode);
+      leetCodeProblemRepository.save(leetCodeProblem);
+      return leetCodeProblem.getQuestion();
   }
 
-  public String isPOTDSolved(String username){
-
-      String query= """
-              query recentSubmissions($username: String!) {
-                recentSubmissionList(username: $username) {
-                  titleSlug
-                  statusDisplay
-                }
-              }
-              """;
-      GraphQLRequest request = new GraphQLRequest(query,Map.of("username",username));
-
-      String rawjson = webClient.post()
-              .uri("/graphql")
-              .bodyValue(request)
-              .retrieve()
-              .bodyToMono(String.class)
-              .block();
-
-      JsonNode root = objectMapper.readTree(rawjson).path("data").path("recentSubmissionList");
-      for(JsonNode submission : root) {
-          String titleSlug = submission.path("titleSlug").asString();
-          if(leetCodeProblemRepository.findByTitleSlug(titleSlug) != null){
-              return "solved";
-          }
-
-      }
-      return "not solved";
-
-  }
-
-
-
-  public QuestionTransferDTO makeQuestion(JsonNode questionNode, String date) {
+  public LeetCodeProblem makeQuestion(JsonNode questionNode) {
     try {
      Integer problemID = questionNode.path("questionFrontendId").asInt();
       String title = questionNode.path("title").asString();
       String titleSlug = questionNode.path("titleSlug").asString();
       String difficulty = questionNode.path("difficulty").asString();
       String content = questionNode.path("content").asString();
-      String statsString = questionNode.path("stats").asText();
+      String statsString = questionNode.path("stats").asString();
       JsonNode statsNode = objectMapper.readTree(statsString);
       int totalAcceptedraw = statsNode.path("totalAcceptedRaw").asInt(0);
       int totalSubmissionRaw = statsNode.path("totalSubmissionRaw").asInt(0);
-      String acceptanceRate = statsNode.path("acRate").asText("N/A");
+      String acceptanceRate = statsNode.path("acRate").asString("N/A");
       List<String> hint = new ArrayList<>();
       JsonNode hintslist = questionNode.get("hints");
       hint = StreamSupport.stream(hintslist.spliterator(), false)
@@ -369,13 +410,12 @@ public class LeetCodeClient {
               .toList();
 
 
-      QuestionTransferDTO response = new QuestionTransferDTO();
+      LeetCodeProblem response = new LeetCodeProblem();
       response.setTitleSlug(titleSlug);
       response.setTitle(title);
       response.setContent(content);
       response.setDifficulty(difficulty);
       response.setProblemId(problemID);
-      response.setDate(date);
       response.setTopicTags(topicTags);
       response.setHints(hint);
       response.setAcceptanceRate(acceptanceRate);
