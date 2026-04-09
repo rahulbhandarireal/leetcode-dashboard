@@ -1,0 +1,630 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2254 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 782 Tm (LEETCODE DASHBOARD ISSUE FIX REPORT) Tj
+1 0 0 1 50 767 Tm () Tj
+1 0 0 1 50 752 Tm () Tj
+1 0 0 1 50 737 Tm (This report explains the problems that existed in the project earlier, why they were risky,) Tj
+1 0 0 1 50 722 Tm (and how each one was fixed in a beginner-friendly way.) Tj
+1 0 0 1 50 707 Tm () Tj
+1 0 0 1 50 692 Tm () Tj
+1 0 0 1 50 677 Tm (1. STARTUP `RUN\(\)` METHOD COULD BLOCK THE WHOLE APPLICATION) Tj
+1 0 0 1 50 662 Tm () Tj
+1 0 0 1 50 647 Tm () Tj
+1 0 0 1 50 632 Tm (WHAT WAS HAPPENING BEFORE) Tj
+1 0 0 1 50 617 Tm () Tj
+1 0 0 1 50 602 Tm () Tj
+1 0 0 1 50 587 Tm (The Spring Boot application class implemented `CommandLineRunner`. Inside its `run\(\)`) Tj
+1 0 0 1 50 572 Tm (method, the code kept trying to fetch the daily problem in a `while` loop until the result) Tj
+1 0 0 1 50 557 Tm (was not `null`.) Tj
+1 0 0 1 50 542 Tm () Tj
+1 0 0 1 50 527 Tm () Tj
+1 0 0 1 50 512 Tm (That meant:) Tj
+1 0 0 1 50 497 Tm () Tj
+1 0 0 1 50 482 Tm () Tj
+1 0 0 1 50 467 Tm (- if LeetCode was down, startup never finished) Tj
+1 0 0 1 50 452 Tm (- if the network failed, startup never finished) Tj
+1 0 0 1 50 437 Tm (- if some parsing error happened, startup never finished) Tj
+1 0 0 1 50 422 Tm (- the application could stay stuck in boot forever) Tj
+1 0 0 1 50 407 Tm () Tj
+1 0 0 1 50 392 Tm () Tj
+1 0 0 1 50 377 Tm (WHY THIS WAS A PROBLEM) Tj
+1 0 0 1 50 362 Tm () Tj
+1 0 0 1 50 347 Tm () Tj
+1 0 0 1 50 332 Tm (When an application starts, it should either:) Tj
+1 0 0 1 50 317 Tm () Tj
+1 0 0 1 50 302 Tm () Tj
+1 0 0 1 50 287 Tm (- start successfully, or) Tj
+1 0 0 1 50 272 Tm (- fail clearly and quickly) Tj
+1 0 0 1 50 257 Tm () Tj
+1 0 0 1 50 242 Tm () Tj
+1 0 0 1 50 227 Tm (It should not keep looping forever without a limit. That kind of code is dangerous because) Tj
+1 0 0 1 50 212 Tm (it hides the real error and makes the application look frozen.) Tj
+1 0 0 1 50 197 Tm () Tj
+1 0 0 1 50 182 Tm () Tj
+1 0 0 1 50 167 Tm (HOW IT WAS FIXED) Tj
+1 0 0 1 50 152 Tm () Tj
+1 0 0 1 50 137 Tm () Tj
+1 0 0 1 50 122 Tm (The `run\(\)` method was changed to:) Tj
+1 0 0 1 50 107 Tm () Tj
+1 0 0 1 50 92 Tm () Tj
+1 0 0 1 50 77 Tm (- try only once during startup) Tj
+1 0 0 1 50 62 Tm (- store the daily problem if the fetch succeeds) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 1977 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 782 Tm (- log a warning if the fetch fails) Tj
+1 0 0 1 50 767 Tm (- let the application continue starting) Tj
+1 0 0 1 50 752 Tm () Tj
+1 0 0 1 50 737 Tm () Tj
+1 0 0 1 50 722 Tm (WHY THE NEW VERSION IS BETTER) Tj
+1 0 0 1 50 707 Tm () Tj
+1 0 0 1 50 692 Tm () Tj
+1 0 0 1 50 677 Tm (Now the application is not held hostage by one external API call. Startup is stable, and the) Tj
+1 0 0 1 50 662 Tm (scheduler can retry later.) Tj
+1 0 0 1 50 647 Tm () Tj
+1 0 0 1 50 632 Tm () Tj
+1 0 0 1 50 617 Tm (2. `DAILYPROBLEMHOLDER.GETCURRENTPROBLEM\(\)` COULD BE `NULL`) Tj
+1 0 0 1 50 602 Tm () Tj
+1 0 0 1 50 587 Tm () Tj
+1 0 0 1 50 572 Tm (WHAT WAS HAPPENING BEFORE) Tj
+1 0 0 1 50 557 Tm () Tj
+1 0 0 1 50 542 Tm () Tj
+1 0 0 1 50 527 Tm (The method used by `/ispotdsolved/{username}` directly read:) Tj
+1 0 0 1 50 512 Tm () Tj
+1 0 0 1 50 497 Tm () Tj
+1 0 0 1 50 482 Tm (- `dailyProblemHolder.getCurrentProblem\(\)`) Tj
+1 0 0 1 50 467 Tm () Tj
+1 0 0 1 50 452 Tm () Tj
+1 0 0 1 50 437 Tm (and then immediately used:) Tj
+1 0 0 1 50 422 Tm () Tj
+1 0 0 1 50 407 Tm () Tj
+1 0 0 1 50 392 Tm (- `dailypotd.getProblemId\(\)`) Tj
+1 0 0 1 50 377 Tm () Tj
+1 0 0 1 50 362 Tm () Tj
+1 0 0 1 50 347 Tm (If the daily problem had not been loaded yet, the holder was `null`, and the code threw a) Tj
+1 0 0 1 50 332 Tm (`NullPointerException`.) Tj
+1 0 0 1 50 317 Tm () Tj
+1 0 0 1 50 302 Tm () Tj
+1 0 0 1 50 287 Tm (WHY THIS WAS A PROBLEM) Tj
+1 0 0 1 50 272 Tm () Tj
+1 0 0 1 50 257 Tm () Tj
+1 0 0 1 50 242 Tm (This can happen in normal situations:) Tj
+1 0 0 1 50 227 Tm () Tj
+1 0 0 1 50 212 Tm () Tj
+1 0 0 1 50 197 Tm (- the app just started) Tj
+1 0 0 1 50 182 Tm (- startup fetch failed) Tj
+1 0 0 1 50 167 Tm (- scheduler has not run yet) Tj
+1 0 0 1 50 152 Tm () Tj
+1 0 0 1 50 137 Tm () Tj
+1 0 0 1 50 122 Tm (So the endpoint was fragile even when the user did nothing wrong.) Tj
+1 0 0 1 50 107 Tm () Tj
+1 0 0 1 50 92 Tm () Tj
+1 0 0 1 50 77 Tm (HOW IT WAS FIXED) Tj
+1 0 0 1 50 62 Tm () Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 2161 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 782 Tm () Tj
+1 0 0 1 50 767 Tm (The method now:) Tj
+1 0 0 1 50 752 Tm () Tj
+1 0 0 1 50 737 Tm () Tj
+1 0 0 1 50 722 Tm (- checks whether the holder is `null`) Tj
+1 0 0 1 50 707 Tm (- if it is `null`, it tries to fetch the daily problem on demand) Tj
+1 0 0 1 50 692 Tm (- stores the fetched problem back in the holder) Tj
+1 0 0 1 50 677 Tm (- throws a controlled exception if the fetch still fails) Tj
+1 0 0 1 50 662 Tm () Tj
+1 0 0 1 50 647 Tm () Tj
+1 0 0 1 50 632 Tm (WHY THE NEW VERSION IS BETTER) Tj
+1 0 0 1 50 617 Tm () Tj
+1 0 0 1 50 602 Tm () Tj
+1 0 0 1 50 587 Tm (The endpoint no longer crashes with a null pointer just because the holder was empty.) Tj
+1 0 0 1 50 572 Tm () Tj
+1 0 0 1 50 557 Tm () Tj
+1 0 0 1 50 542 Tm (3. N+1 REMOTE CALLS IN RECENT SOLVED PROBLEMS) Tj
+1 0 0 1 50 527 Tm () Tj
+1 0 0 1 50 512 Tm () Tj
+1 0 0 1 50 497 Tm (WHAT WAS HAPPENING BEFORE) Tj
+1 0 0 1 50 482 Tm () Tj
+1 0 0 1 50 467 Tm () Tj
+1 0 0 1 50 452 Tm (The code first fetched the list of recent submissions. Then, for every accepted submission,) Tj
+1 0 0 1 50 437 Tm (it made another remote GraphQL call to get full problem details by `titleSlug`.) Tj
+1 0 0 1 50 422 Tm () Tj
+1 0 0 1 50 407 Tm () Tj
+1 0 0 1 50 392 Tm (That pattern is called an N+1 problem:) Tj
+1 0 0 1 50 377 Tm () Tj
+1 0 0 1 50 362 Tm () Tj
+1 0 0 1 50 347 Tm (- 1 remote call to fetch the submission list) Tj
+1 0 0 1 50 332 Tm (- N more remote calls for N accepted submissions) Tj
+1 0 0 1 50 317 Tm () Tj
+1 0 0 1 50 302 Tm () Tj
+1 0 0 1 50 287 Tm (WHY THIS WAS A PROBLEM) Tj
+1 0 0 1 50 272 Tm () Tj
+1 0 0 1 50 257 Tm () Tj
+1 0 0 1 50 242 Tm (This causes:) Tj
+1 0 0 1 50 227 Tm () Tj
+1 0 0 1 50 212 Tm () Tj
+1 0 0 1 50 197 Tm (- slower responses) Tj
+1 0 0 1 50 182 Tm (- unnecessary API traffic) Tj
+1 0 0 1 50 167 Tm (- repeated calls for the same problem if it appears multiple times) Tj
+1 0 0 1 50 152 Tm (- more chances of failure because more network calls are being made) Tj
+1 0 0 1 50 137 Tm () Tj
+1 0 0 1 50 122 Tm () Tj
+1 0 0 1 50 107 Tm (HOW IT WAS FIXED) Tj
+1 0 0 1 50 92 Tm () Tj
+1 0 0 1 50 77 Tm () Tj
+1 0 0 1 50 62 Tm (The flow was improved in two important ways:) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 2334 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 782 Tm () Tj
+1 0 0 1 50 767 Tm () Tj
+1 0 0 1 50 752 Tm (- only accepted submissions are processed) Tj
+1 0 0 1 50 737 Tm (- problems are cached in a `Map<String, LeetCodeProblem>` during the method execution) Tj
+1 0 0 1 50 722 Tm (- the database is checked first by `titleSlug`) Tj
+1 0 0 1 50 707 Tm (- the remote GraphQL call is made only if the problem is not already in memory and not) Tj
+1 0 0 1 50 692 Tm (  already in the database) Tj
+1 0 0 1 50 677 Tm () Tj
+1 0 0 1 50 662 Tm () Tj
+1 0 0 1 50 647 Tm (WHY THE NEW VERSION IS BETTER) Tj
+1 0 0 1 50 632 Tm () Tj
+1 0 0 1 50 617 Tm () Tj
+1 0 0 1 50 602 Tm (Now repeated accepted submissions for the same problem do not keep hitting LeetCode again) Tj
+1 0 0 1 50 587 Tm (and again. The main remote N+1 issue is solved.) Tj
+1 0 0 1 50 572 Tm () Tj
+1 0 0 1 50 557 Tm () Tj
+1 0 0 1 50 542 Tm (4. USER STATS WERE CACHED FOREVER) Tj
+1 0 0 1 50 527 Tm () Tj
+1 0 0 1 50 512 Tm () Tj
+1 0 0 1 50 497 Tm (WHAT WAS HAPPENING BEFORE) Tj
+1 0 0 1 50 482 Tm () Tj
+1 0 0 1 50 467 Tm () Tj
+1 0 0 1 50 452 Tm (The method `getUserStats\(username\)` looked in the database first. If a `Student` record) Tj
+1 0 0 1 50 437 Tm (existed, it returned that cached value immediately and never called LeetCode again.) Tj
+1 0 0 1 50 422 Tm () Tj
+1 0 0 1 50 407 Tm () Tj
+1 0 0 1 50 392 Tm (WHY THIS WAS A PROBLEM) Tj
+1 0 0 1 50 377 Tm () Tj
+1 0 0 1 50 362 Tm () Tj
+1 0 0 1 50 347 Tm (That means cached data could become stale forever. A user might solve more problems on) Tj
+1 0 0 1 50 332 Tm (LeetCode, but your dashboard would continue showing old values.) Tj
+1 0 0 1 50 317 Tm () Tj
+1 0 0 1 50 302 Tm () Tj
+1 0 0 1 50 287 Tm (HOW IT WAS FIXED) Tj
+1 0 0 1 50 272 Tm () Tj
+1 0 0 1 50 257 Tm () Tj
+1 0 0 1 50 242 Tm (The `Student` entity now has an `updatedAt` field with `@UpdateTimestamp`.) Tj
+1 0 0 1 50 227 Tm () Tj
+1 0 0 1 50 212 Tm () Tj
+1 0 0 1 50 197 Tm (Then the service checks whether the cached row is still fresh:) Tj
+1 0 0 1 50 182 Tm () Tj
+1 0 0 1 50 167 Tm () Tj
+1 0 0 1 50 152 Tm (- if updated within the last 1 hour, return cached data) Tj
+1 0 0 1 50 137 Tm (- otherwise call LeetCode again, refresh the row, and save it) Tj
+1 0 0 1 50 122 Tm () Tj
+1 0 0 1 50 107 Tm () Tj
+1 0 0 1 50 92 Tm (WHY THE NEW VERSION IS BETTER) Tj
+1 0 0 1 50 77 Tm () Tj
+1 0 0 1 50 62 Tm () Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 2167 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 782 Tm (The cache now has a time limit. It improves performance without becoming permanently stale.) Tj
+1 0 0 1 50 767 Tm () Tj
+1 0 0 1 50 752 Tm () Tj
+1 0 0 1 50 737 Tm (5. REFRESHING STALE `STUDENT` DATA COULD CREATE DUPLICATE RECORDS) Tj
+1 0 0 1 50 722 Tm () Tj
+1 0 0 1 50 707 Tm () Tj
+1 0 0 1 50 692 Tm (WHAT WAS HAPPENING BEFORE) Tj
+1 0 0 1 50 677 Tm () Tj
+1 0 0 1 50 662 Tm () Tj
+1 0 0 1 50 647 Tm (When cached data became stale, the service created a brand-new `Student` object instead of) Tj
+1 0 0 1 50 632 Tm (updating the existing one.) Tj
+1 0 0 1 50 617 Tm () Tj
+1 0 0 1 50 602 Tm () Tj
+1 0 0 1 50 587 Tm (That was risky because `username` is unique in the database. Saving a new entity with the) Tj
+1 0 0 1 50 572 Tm (same username could cause a duplicate key problem.) Tj
+1 0 0 1 50 557 Tm () Tj
+1 0 0 1 50 542 Tm () Tj
+1 0 0 1 50 527 Tm (HOW IT WAS FIXED) Tj
+1 0 0 1 50 512 Tm () Tj
+1 0 0 1 50 497 Tm () Tj
+1 0 0 1 50 482 Tm (The service now:) Tj
+1 0 0 1 50 467 Tm () Tj
+1 0 0 1 50 452 Tm () Tj
+1 0 0 1 50 437 Tm (- creates a new `Student` only if one does not already exist) Tj
+1 0 0 1 50 422 Tm (- otherwise updates the fields on the existing entity) Tj
+1 0 0 1 50 407 Tm (- saves the updated entity) Tj
+1 0 0 1 50 392 Tm () Tj
+1 0 0 1 50 377 Tm () Tj
+1 0 0 1 50 362 Tm (WHY THE NEW VERSION IS BETTER) Tj
+1 0 0 1 50 347 Tm () Tj
+1 0 0 1 50 332 Tm () Tj
+1 0 0 1 50 317 Tm (Refreshing stale cache now behaves like an update, not an accidental duplicate insert.) Tj
+1 0 0 1 50 302 Tm () Tj
+1 0 0 1 50 287 Tm () Tj
+1 0 0 1 50 272 Tm (6. GRAPHQL ERROR HANDLING WAS INCOMPLETE) Tj
+1 0 0 1 50 257 Tm () Tj
+1 0 0 1 50 242 Tm () Tj
+1 0 0 1 50 227 Tm (WHAT WAS HAPPENING BEFORE) Tj
+1 0 0 1 50 212 Tm () Tj
+1 0 0 1 50 197 Tm () Tj
+1 0 0 1 50 182 Tm (Many methods assumed that:) Tj
+1 0 0 1 50 167 Tm () Tj
+1 0 0 1 50 152 Tm () Tj
+1 0 0 1 50 137 Tm (- the HTTP request succeeded) Tj
+1 0 0 1 50 122 Tm (- the response body existed) Tj
+1 0 0 1 50 107 Tm (- the JSON had a `data` field) Tj
+1 0 0 1 50 92 Tm (- the GraphQL response had no `errors`) Tj
+1 0 0 1 50 77 Tm (- required nested fields were always present) Tj
+1 0 0 1 50 62 Tm () Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 2122 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 782 Tm () Tj
+1 0 0 1 50 767 Tm (WHY THIS WAS A PROBLEM) Tj
+1 0 0 1 50 752 Tm () Tj
+1 0 0 1 50 737 Tm () Tj
+1 0 0 1 50 722 Tm (GraphQL often returns errors inside a successful HTTP response. So even `200 OK` can still) Tj
+1 0 0 1 50 707 Tm (contain failure information.) Tj
+1 0 0 1 50 692 Tm () Tj
+1 0 0 1 50 677 Tm () Tj
+1 0 0 1 50 662 Tm (Without checking that structure, the code could:) Tj
+1 0 0 1 50 647 Tm () Tj
+1 0 0 1 50 632 Tm () Tj
+1 0 0 1 50 617 Tm (- parse missing fields) Tj
+1 0 0 1 50 602 Tm (- use wrong defaults like `0`) Tj
+1 0 0 1 50 587 Tm (- throw confusing exceptions later) Tj
+1 0 0 1 50 572 Tm (- hide the real cause of the failure) Tj
+1 0 0 1 50 557 Tm () Tj
+1 0 0 1 50 542 Tm () Tj
+1 0 0 1 50 527 Tm (HOW IT WAS FIXED) Tj
+1 0 0 1 50 512 Tm () Tj
+1 0 0 1 50 497 Tm () Tj
+1 0 0 1 50 482 Tm (A shared GraphQL execution method was added. It now:) Tj
+1 0 0 1 50 467 Tm () Tj
+1 0 0 1 50 452 Tm () Tj
+1 0 0 1 50 437 Tm (- sends the request) Tj
+1 0 0 1 50 422 Tm (- checks for empty responses) Tj
+1 0 0 1 50 407 Tm (- parses JSON once) Tj
+1 0 0 1 50 392 Tm (- checks the GraphQL `errors` array) Tj
+1 0 0 1 50 377 Tm (- validates that `data` exists) Tj
+1 0 0 1 50 362 Tm (- returns parsed `data` only when the response is valid) Tj
+1 0 0 1 50 347 Tm () Tj
+1 0 0 1 50 332 Tm () Tj
+1 0 0 1 50 317 Tm (Helper methods were also added to require important nodes and integers before using them.) Tj
+1 0 0 1 50 302 Tm () Tj
+1 0 0 1 50 287 Tm () Tj
+1 0 0 1 50 272 Tm (WHY THE NEW VERSION IS BETTER) Tj
+1 0 0 1 50 257 Tm () Tj
+1 0 0 1 50 242 Tm () Tj
+1 0 0 1 50 227 Tm (Now GraphQL handling is consistent across the service. Errors are caught early and described) Tj
+1 0 0 1 50 212 Tm (more clearly.) Tj
+1 0 0 1 50 197 Tm () Tj
+1 0 0 1 50 182 Tm () Tj
+1 0 0 1 50 167 Tm (7. API ERROR RESPONSES WERE TOO GENERIC) Tj
+1 0 0 1 50 152 Tm () Tj
+1 0 0 1 50 137 Tm () Tj
+1 0 0 1 50 122 Tm (WHAT WAS HAPPENING BEFORE) Tj
+1 0 0 1 50 107 Tm () Tj
+1 0 0 1 50 92 Tm () Tj
+1 0 0 1 50 77 Tm (The global exception handler returned `400 Bad Request` for every `RuntimeException`.) Tj
+1 0 0 1 50 62 Tm () Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 2063 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 782 Tm () Tj
+1 0 0 1 50 767 Tm (WHY THIS WAS A PROBLEM) Tj
+1 0 0 1 50 752 Tm () Tj
+1 0 0 1 50 737 Tm () Tj
+1 0 0 1 50 722 Tm (Not every failure is a bad request. For example:) Tj
+1 0 0 1 50 707 Tm () Tj
+1 0 0 1 50 692 Tm () Tj
+1 0 0 1 50 677 Tm (- if the user is not found, that should usually be `404`) Tj
+1 0 0 1 50 662 Tm (- if LeetCode is down, that is an upstream service issue, closer to `502`) Tj
+1 0 0 1 50 647 Tm (- if the server has an internal bug, that should be `500`) Tj
+1 0 0 1 50 632 Tm () Tj
+1 0 0 1 50 617 Tm () Tj
+1 0 0 1 50 602 Tm (Returning `400` for everything makes debugging harder and gives the client the wrong) Tj
+1 0 0 1 50 587 Tm (meaning.) Tj
+1 0 0 1 50 572 Tm () Tj
+1 0 0 1 50 557 Tm () Tj
+1 0 0 1 50 542 Tm (HOW IT WAS FIXED) Tj
+1 0 0 1 50 527 Tm () Tj
+1 0 0 1 50 512 Tm () Tj
+1 0 0 1 50 497 Tm (Custom exceptions were introduced:) Tj
+1 0 0 1 50 482 Tm () Tj
+1 0 0 1 50 467 Tm () Tj
+1 0 0 1 50 452 Tm (- `NotFoundException`) Tj
+1 0 0 1 50 437 Tm (- `UpstreamServiceException`) Tj
+1 0 0 1 50 422 Tm () Tj
+1 0 0 1 50 407 Tm () Tj
+1 0 0 1 50 392 Tm (Then the global exception handler was updated to map them correctly:) Tj
+1 0 0 1 50 377 Tm () Tj
+1 0 0 1 50 362 Tm () Tj
+1 0 0 1 50 347 Tm (- `404 Not Found`) Tj
+1 0 0 1 50 332 Tm (- `502 Bad Gateway`) Tj
+1 0 0 1 50 317 Tm (- `500 Internal Server Error` for uncaught runtime failures) Tj
+1 0 0 1 50 302 Tm (- `400 Bad Request` for input validation problems like blank usernames) Tj
+1 0 0 1 50 287 Tm () Tj
+1 0 0 1 50 272 Tm () Tj
+1 0 0 1 50 257 Tm (WHY THE NEW VERSION IS BETTER) Tj
+1 0 0 1 50 242 Tm () Tj
+1 0 0 1 50 227 Tm () Tj
+1 0 0 1 50 212 Tm (Now the API communicates the kind of failure more honestly and clearly.) Tj
+1 0 0 1 50 197 Tm () Tj
+1 0 0 1 50 182 Tm () Tj
+1 0 0 1 50 167 Tm (8. EXCEPTION MESSAGES WERE TOO BROAD) Tj
+1 0 0 1 50 152 Tm () Tj
+1 0 0 1 50 137 Tm () Tj
+1 0 0 1 50 122 Tm (WHAT WAS HAPPENING BEFORE) Tj
+1 0 0 1 50 107 Tm () Tj
+1 0 0 1 50 92 Tm () Tj
+1 0 0 1 50 77 Tm (Some messages were vague, such as:) Tj
+1 0 0 1 50 62 Tm () Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Length 2119 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 782 Tm () Tj
+1 0 0 1 50 767 Tm (- "Failed to process user stats") Tj
+1 0 0 1 50 752 Tm (- "Rating not available") Tj
+1 0 0 1 50 737 Tm (- "Failed to parse raw json") Tj
+1 0 0 1 50 722 Tm () Tj
+1 0 0 1 50 707 Tm () Tj
+1 0 0 1 50 692 Tm (WHY THIS WAS A PROBLEM) Tj
+1 0 0 1 50 677 Tm () Tj
+1 0 0 1 50 662 Tm () Tj
+1 0 0 1 50 647 Tm (Broad messages make it difficult for beginners and maintainers to understand:) Tj
+1 0 0 1 50 632 Tm () Tj
+1 0 0 1 50 617 Tm () Tj
+1 0 0 1 50 602 Tm (- what operation failed) Tj
+1 0 0 1 50 587 Tm (- what data was missing) Tj
+1 0 0 1 50 572 Tm (- whether the problem was network, parsing, or business logic) Tj
+1 0 0 1 50 557 Tm () Tj
+1 0 0 1 50 542 Tm () Tj
+1 0 0 1 50 527 Tm (HOW IT WAS FIXED) Tj
+1 0 0 1 50 512 Tm () Tj
+1 0 0 1 50 497 Tm () Tj
+1 0 0 1 50 482 Tm (Messages were rewritten to be more specific, for example:) Tj
+1 0 0 1 50 467 Tm () Tj
+1 0 0 1 50 452 Tm () Tj
+1 0 0 1 50 437 Tm (- which GraphQL operation failed) Tj
+1 0 0 1 50 422 Tm (- which username was being processed) Tj
+1 0 0 1 50 407 Tm (- whether the missing data was question details, ranking data, or daily problem data) Tj
+1 0 0 1 50 392 Tm () Tj
+1 0 0 1 50 377 Tm () Tj
+1 0 0 1 50 362 Tm (WHY THE NEW VERSION IS BETTER) Tj
+1 0 0 1 50 347 Tm () Tj
+1 0 0 1 50 332 Tm () Tj
+1 0 0 1 50 317 Tm (The project is easier to debug and easier to explain because the failures describe) Tj
+1 0 0 1 50 302 Tm (themselves better.) Tj
+1 0 0 1 50 287 Tm () Tj
+1 0 0 1 50 272 Tm () Tj
+1 0 0 1 50 257 Tm (9. USERNAME ENCODING WAS HANDLED INCORRECTLY) Tj
+1 0 0 1 50 242 Tm () Tj
+1 0 0 1 50 227 Tm () Tj
+1 0 0 1 50 212 Tm (WHAT WAS HAPPENING BEFORE) Tj
+1 0 0 1 50 197 Tm () Tj
+1 0 0 1 50 182 Tm () Tj
+1 0 0 1 50 167 Tm (At one stage, usernames were manually altered like URL path values, for example turning) Tj
+1 0 0 1 50 152 Tm (spaces into `%20`.) Tj
+1 0 0 1 50 137 Tm () Tj
+1 0 0 1 50 122 Tm () Tj
+1 0 0 1 50 107 Tm (WHY THIS WAS A PROBLEM) Tj
+1 0 0 1 50 92 Tm () Tj
+1 0 0 1 50 77 Tm () Tj
+1 0 0 1 50 62 Tm (GraphQL variables are sent as JSON values, not URL query strings. So manual URL encoding is) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Length 2005 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 782 Tm (the wrong layer here.) Tj
+1 0 0 1 50 767 Tm () Tj
+1 0 0 1 50 752 Tm () Tj
+1 0 0 1 50 737 Tm (It can also create database consistency problems if:) Tj
+1 0 0 1 50 722 Tm () Tj
+1 0 0 1 50 707 Tm () Tj
+1 0 0 1 50 692 Tm (- the stored username is one version) Tj
+1 0 0 1 50 677 Tm (- the lookup username is another version) Tj
+1 0 0 1 50 662 Tm () Tj
+1 0 0 1 50 647 Tm () Tj
+1 0 0 1 50 632 Tm (HOW IT WAS FIXED) Tj
+1 0 0 1 50 617 Tm () Tj
+1 0 0 1 50 602 Tm () Tj
+1 0 0 1 50 587 Tm (A shared username normalization method was added. It now:) Tj
+1 0 0 1 50 572 Tm () Tj
+1 0 0 1 50 557 Tm () Tj
+1 0 0 1 50 542 Tm (- rejects `null`) Tj
+1 0 0 1 50 527 Tm (- rejects blank usernames) Tj
+1 0 0 1 50 512 Tm (- trims leading and trailing spaces) Tj
+1 0 0 1 50 497 Tm (- keeps the value as a normal string for GraphQL variables) Tj
+1 0 0 1 50 482 Tm () Tj
+1 0 0 1 50 467 Tm () Tj
+1 0 0 1 50 452 Tm (WHY THE NEW VERSION IS BETTER) Tj
+1 0 0 1 50 437 Tm () Tj
+1 0 0 1 50 422 Tm () Tj
+1 0 0 1 50 407 Tm (The system now treats usernames consistently in both API calls and database lookups.) Tj
+1 0 0 1 50 392 Tm () Tj
+1 0 0 1 50 377 Tm () Tj
+1 0 0 1 50 362 Tm (10. BLOCKING HTTP CALLS HAD NO TIMEOUT OR RETRY) Tj
+1 0 0 1 50 347 Tm () Tj
+1 0 0 1 50 332 Tm () Tj
+1 0 0 1 50 317 Tm (WHAT WAS HAPPENING BEFORE) Tj
+1 0 0 1 50 302 Tm () Tj
+1 0 0 1 50 287 Tm () Tj
+1 0 0 1 50 272 Tm (The LeetCode requests used blocking calls like `.block\(\)` without any timeout or retry) Tj
+1 0 0 1 50 257 Tm (policy.) Tj
+1 0 0 1 50 242 Tm () Tj
+1 0 0 1 50 227 Tm () Tj
+1 0 0 1 50 212 Tm (WHY THIS WAS A PROBLEM) Tj
+1 0 0 1 50 197 Tm () Tj
+1 0 0 1 50 182 Tm () Tj
+1 0 0 1 50 167 Tm (That means a request could wait forever if the upstream service became slow or unreachable.) Tj
+1 0 0 1 50 152 Tm () Tj
+1 0 0 1 50 137 Tm () Tj
+1 0 0 1 50 122 Tm (HOW IT WAS FIXED) Tj
+1 0 0 1 50 107 Tm () Tj
+1 0 0 1 50 92 Tm () Tj
+1 0 0 1 50 77 Tm (Timeout and retry behavior were added in two places:) Tj
+1 0 0 1 50 62 Tm () Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Length 1671 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 782 Tm () Tj
+1 0 0 1 50 767 Tm (- the `WebClient` configuration now has connection, response, read, and write timeouts) Tj
+1 0 0 1 50 752 Tm (- the shared GraphQL execution method now applies a request timeout and retry with backoff) Tj
+1 0 0 1 50 737 Tm () Tj
+1 0 0 1 50 722 Tm () Tj
+1 0 0 1 50 707 Tm (Retries are limited to transient failures such as:) Tj
+1 0 0 1 50 692 Tm () Tj
+1 0 0 1 50 677 Tm () Tj
+1 0 0 1 50 662 Tm (- network problems) Tj
+1 0 0 1 50 647 Tm (- upstream `5xx` responses) Tj
+1 0 0 1 50 632 Tm () Tj
+1 0 0 1 50 617 Tm () Tj
+1 0 0 1 50 602 Tm (WHY THE NEW VERSION IS BETTER) Tj
+1 0 0 1 50 587 Tm () Tj
+1 0 0 1 50 572 Tm () Tj
+1 0 0 1 50 557 Tm (The application no longer waits forever for LeetCode. Temporary failures get a few safe) Tj
+1 0 0 1 50 542 Tm (retries, but long hangs are prevented.) Tj
+1 0 0 1 50 527 Tm () Tj
+1 0 0 1 50 512 Tm () Tj
+1 0 0 1 50 497 Tm (FINAL SUMMARY) Tj
+1 0 0 1 50 482 Tm () Tj
+1 0 0 1 50 467 Tm () Tj
+1 0 0 1 50 452 Tm (The project is now stronger in these areas:) Tj
+1 0 0 1 50 437 Tm () Tj
+1 0 0 1 50 422 Tm () Tj
+1 0 0 1 50 407 Tm (- startup safety) Tj
+1 0 0 1 50 392 Tm (- null safety) Tj
+1 0 0 1 50 377 Tm (- caching correctness) Tj
+1 0 0 1 50 362 Tm (- remote call efficiency) Tj
+1 0 0 1 50 347 Tm (- GraphQL validation) Tj
+1 0 0 1 50 332 Tm (- API error quality) Tj
+1 0 0 1 50 317 Tm (- exception clarity) Tj
+1 0 0 1 50 302 Tm (- username handling) Tj
+1 0 0 1 50 287 Tm (- network resilience) Tj
+1 0 0 1 50 272 Tm () Tj
+1 0 0 1 50 257 Tm () Tj
+1 0 0 1 50 242 Tm (In short, the application became more reliable, easier to debug, and safer for real-world) Tj
+1 0 0 1 50 227 Tm (use.) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Pages /Count 10 /Kids [13 0 R 14 0 R 15 0 R 16 0 R 17 0 R 18 0 R 19 0 R 20 0 R 21 0 R 22 0 R] >>
+endobj
+13 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+14 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+15 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+16 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 5 0 R >>
+endobj
+17 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+18 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 7 0 R >>
+endobj
+19 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+20 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 9 0 R >>
+endobj
+21 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+22 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 11 0 R >>
+endobj
+23 0 obj
+<< /Type /Catalog /Pages 12 0 R >>
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000002385 00000 n 
+0000004414 00000 n 
+0000006627 00000 n 
+0000009013 00000 n 
+0000011232 00000 n 
+0000013406 00000 n 
+0000015521 00000 n 
+0000017692 00000 n 
+0000019750 00000 n 
+0000021474 00000 n 
+0000021597 00000 n 
+0000021725 00000 n 
+0000021853 00000 n 
+0000021981 00000 n 
+0000022109 00000 n 
+0000022237 00000 n 
+0000022365 00000 n 
+0000022493 00000 n 
+0000022621 00000 n 
+0000022750 00000 n 
+0000022879 00000 n 
+trailer
+<< /Size 24 /Root 23 0 R >>
+startxref
+22930
+%%EOF
