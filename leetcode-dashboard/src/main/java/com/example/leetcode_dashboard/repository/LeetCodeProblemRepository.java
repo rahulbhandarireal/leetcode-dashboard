@@ -9,5 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface LeetCodeProblemRepository extends JpaRepository<LeetCodeProblem,Integer> {
 
     LeetCodeProblem findByProblemId(int problemID);
-    LeetCodeProblem findByTitleSlug(String titleSlug);
+    @Query("SELECT p FROM LeetCodeProblem p WHERE p.titleSlug = :titleSlug")
+    LeetCodeProblem findProblemByTitleSlug(String titleSlug);
+
 }

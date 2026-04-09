@@ -4,7 +4,9 @@ import com.example.leetcode_dashboard.dto.UserStatsResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class Student {
     private String username;
 
     private int totalSolved;
+    private int totalContestAttended;
 
     private int hard;
     private int easy;
@@ -31,13 +34,16 @@ public class Student {
     private String rating;
     private int streak;
     private int totalActiveDays;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<SolvedProblem> solvedProblems = new ArrayList<>();
 
 
     @JsonIgnore
-    public UserStatsResponse getUserStats(){
+    public UserStatsResponse getUserStatsResponse(){
         return UserStatsResponse.builder()
                 .username(username)
                 .totalSolved(totalSolved)
@@ -46,6 +52,7 @@ public class Student {
                 .streak(streak)
                 .totalActiveDays(totalActiveDays)
                 .mediumSolved(medium)
+                .totalContestAttended(totalContestAttended)
                 .rating(rating)
                 .build();
 

@@ -12,8 +12,8 @@ import java.util.Optional;
 @Repository
 public interface SolvedProblemRepository extends JpaRepository<SolvedProblem,Integer> {
 
-    Optional<SolvedProblem> existsByStudent_UsernameAndProblem_ProblemId(String username, int problemId);
-
+    Optional<SolvedProblem> findByStudent_UsernameAndProblem_ProblemId(
+            String username, int problemId);
     @Query("select s from SolvedProblem s where s.student.username = ?1")
     List<SolvedProblem> findByUsername(String username);
 

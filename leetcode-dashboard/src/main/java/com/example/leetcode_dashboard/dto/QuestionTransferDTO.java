@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class QuestionTransferDTO {
-    private String date;
     private int problemId;
     private String title;
     private String titleSlug;

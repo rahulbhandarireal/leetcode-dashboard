@@ -19,6 +19,7 @@ public class UserStatsResponse {
     private int totalActiveDays;
     private String rating;
     private int streak;
+    private int totalContestAttended;
 
 
 

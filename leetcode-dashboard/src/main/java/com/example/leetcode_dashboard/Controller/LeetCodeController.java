@@ -3,13 +3,8 @@ package com.example.leetcode_dashboard.Controller;
 import com.example.leetcode_dashboard.Service.LeetCodeClient;
 import com.example.leetcode_dashboard.dto.QuestionTransferDTO;
 import com.example.leetcode_dashboard.dto.UserStatsResponse;
-import com.example.leetcode_dashboard.model.LeetCodeProblem;
-import com.example.leetcode_dashboard.model.Student;
 import com.example.leetcode_dashboard.response.ApiResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -25,22 +20,25 @@ public class LeetCodeController {
     }
 
 
-    @GetMapping("/hello")
-    public Map<String, String> hello() {
-        return Map.of("message", "Backend Working");
-    }
+
+
 
     @GetMapping("/stats/{username}")
     public ApiResponse<UserStatsResponse> getUserStats(@PathVariable String username) {
-        UserStatsResponse userStatsResponse=leetCodeClient.getUserStats(username);
+
         ApiResponse<UserStatsResponse> apiResponse=new ApiResponse<>();
-        apiResponse.setData(userStatsResponse);
-        apiResponse.setSuccess(true);
-        apiResponse.setMessage("Success");
+        try {
+            UserStatsResponse userStatsResponse = leetCodeClient.getUserStats(username);
+            apiResponse.setData(userStatsResponse);
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("Success");
+        }catch (Exception e){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage(e.getMessage());
+        }
+
         return apiResponse;
     }
-
-
 
     @GetMapping("/questionoftheday")
         public QuestionTransferDTO getQuestionoftheday(){
@@ -52,10 +50,7 @@ public class LeetCodeController {
         return leetCodeClient.getRecentSolvedProblems(username);
     }
 
-    @GetMapping("/getranking/{username}")
-    public String getrank(@PathVariable String username){
-        return STR."\{leetCodeClient.getRanking(username)}";
-    }
+
     
     @GetMapping("/ispotdsolved/{username}")
     public String isRecentSolvedProblem(@PathVariable String username){
