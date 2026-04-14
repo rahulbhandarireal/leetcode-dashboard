@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: leetcode-dashboard
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/leetcodedashboardBattle?createDatabaseIfNotExist=true
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+server:
+  port: 8082

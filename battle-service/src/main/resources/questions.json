@@ -1,0 +1,247 @@
+[
+  {
+    "title": "Two Sum",
+    "slug": "two-sum",
+    "frontendId": 1,
+    "topic": "ARRAY",
+    "difficulty": "EASY"
+  },
+  {
+    "title": "3Sum",
+    "slug": "3sum",
+    "frontendId": 15,
+    "topic": "ARRAY",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "4Sum",
+    "slug": "4sum",
+    "frontendId": 18,
+    "topic": "ARRAY",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Sort Colors",
+    "slug": "sort-colors",
+    "frontendId": 75,
+    "topic": "ARRAY",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Maximum Product Subarray",
+    "slug": "maximum-product-subarray",
+    "frontendId": 152,
+    "topic": "ARRAY",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Move Zeroes",
+    "slug": "move-zeroes",
+    "frontendId": 283,
+    "topic": "ARRAY",
+    "difficulty": "EASY"
+  },
+  {
+    "title": "Best Time to Buy and Sell Stock",
+    "slug": "best-time-to-buy-and-sell-stock",
+    "frontendId": 121,
+    "topic": "ARRAY",
+    "difficulty": "EASY"
+  },
+  {
+    "title": "Find Pivot Index",
+    "slug": "find-pivot-index",
+    "frontendId": 724,
+    "topic": "ARRAY",
+    "difficulty": "EASY"
+  },
+  {
+    "title": "Running Sum of 1D Array",
+    "slug": "running-sum-of-1d-array",
+    "frontendId": 1480,
+    "topic": "ARRAY",
+    "difficulty": "EASY"
+  },
+  {
+    "title": "Binary Search",
+    "slug": "binary-search",
+    "frontendId": 704,
+    "topic": "BINARY_SEARCH",
+    "difficulty": "EASY"
+  },
+  {
+    "title": "Search in Rotated Sorted Array",
+    "slug": "search-in-rotated-sorted-array",
+    "frontendId": 33,
+    "topic": "BINARY_SEARCH",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Find Minimum in Rotated Sorted Array",
+    "slug": "find-minimum-in-rotated-sorted-array",
+    "frontendId": 153,
+    "topic": "BINARY_SEARCH",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Search a 2D Matrix",
+    "slug": "search-a-2d-matrix",
+    "frontendId": 74,
+    "topic": "BINARY_SEARCH",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Find Peak Element",
+    "slug": "find-peak-element",
+    "frontendId": 162,
+    "topic": "BINARY_SEARCH",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Koko Eating Bananas",
+    "slug": "koko-eating-bananas",
+    "frontendId": 875,
+    "topic": "BINARY_SEARCH",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Reverse Linked List",
+    "slug": "reverse-linked-list",
+    "frontendId": 206,
+    "topic": "LINKED_LIST",
+    "difficulty": "EASY"
+  },
+  {
+    "title": "Linked List Cycle",
+    "slug": "linked-list-cycle",
+    "frontendId": 141,
+    "topic": "LINKED_LIST",
+    "difficulty": "EASY"
+  },
+  {
+    "title": "Add Two Numbers",
+    "slug": "add-two-numbers",
+    "frontendId": 2,
+    "topic": "LINKED_LIST",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Merge Two Sorted Lists",
+    "slug": "merge-two-sorted-lists",
+    "frontendId": 21,
+    "topic": "LINKED_LIST",
+    "difficulty": "EASY"
+  },
+  {
+    "title": "Palindrome Linked List",
+    "slug": "palindrome-linked-list",
+    "frontendId": 234,
+    "topic": "LINKED_LIST",
+    "difficulty": "EASY"
+  },
+  {
+    "title": "Number of Islands",
+    "slug": "number-of-islands",
+    "frontendId": 200,
+    "topic": "GRAPH",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Clone Graph",
+    "slug": "clone-graph",
+    "frontendId": 133,
+    "topic": "GRAPH",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Course Schedule",
+    "slug": "course-schedule",
+    "frontendId": 207,
+    "topic": "GRAPH",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Rotting Oranges",
+    "slug": "rotting-oranges",
+    "frontendId": 994,
+    "topic": "GRAPH",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Flood Fill",
+    "slug": "flood-fill",
+    "frontendId": 733,
+    "topic": "GRAPH",
+    "difficulty": "EASY"
+  },
+  {
+    "title": "Subsets",
+    "slug": "subsets",
+    "frontendId": 78,
+    "topic": "BACKTRACKING",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Permutations",
+    "slug": "permutations",
+    "frontendId": 46,
+    "topic": "BACKTRACKING",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Combination Sum",
+    "slug": "combination-sum",
+    "frontendId": 39,
+    "topic": "BACKTRACKING",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Generate Parentheses",
+    "slug": "generate-parentheses",
+    "frontendId": 22,
+    "topic": "BACKTRACKING",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Word Search",
+    "slug": "word-search",
+    "frontendId": 79,
+    "topic": "BACKTRACKING",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Climbing Stairs",
+    "slug": "climbing-stairs",
+    "frontendId": 70,
+    "topic": "DP",
+    "difficulty": "EASY"
+  },
+  {
+    "title": "House Robber",
+    "slug": "house-robber",
+    "frontendId": 198,
+    "topic": "DP",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Unique Paths",
+    "slug": "unique-paths",
+    "frontendId": 62,
+    "topic": "DP",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Coin Change",
+    "slug": "coin-change",
+    "frontendId": 322,
+    "topic": "DP",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "title": "Longest Increasing Subsequence",
+    "slug": "longest-increasing-subsequence",
+    "frontendId": 300,
+    "topic": "DP",
+    "difficulty": "MEDIUM"
+  }
+]
