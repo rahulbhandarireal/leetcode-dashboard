@@ -127,17 +127,6 @@ public class LeetCodeClient {
         return node.asInt();
     }
 
-    private String normalizeUsername(String username) {
-        if (username == null) {
-            throw new IllegalArgumentException("Username is required");
-        }
-        String normalizedUsername = username.trim();
-        if (normalizedUsername.isEmpty()) {
-            throw new IllegalArgumentException("Username must not be blank");
-        }
-        return normalizedUsername;
-    }
-
     private Tuple3<JsonNode, JsonNode, JsonNode> leetcodeapiuserstats(String username){
         String userstatsquery = """
                          query userProfile($username: String!) {
@@ -206,11 +195,11 @@ public class LeetCodeClient {
     }
 
     public UserStatsResponse getUserStats(String username) {
-        username = normalizeUsername(username);
+
         Student student = studentRepository.findByUsername(username);
         if (student != null &&
                 student.getUpdatedAt() != null &&
-                student.getUpdatedAt().isAfter(LocalDateTime.now().minusHours(1))) {
+                student.getUpdatedAt().isAfter(LocalDateTime.now().minusMinutes(30))) {
             return student.getUserStatsResponse();
         }
 
@@ -308,7 +297,6 @@ public class LeetCodeClient {
 
     @Transactional
     public List<QuestionTransferDTO> getRecentSolvedProblems(String username) {
-        username = normalizeUsername(username);
         Student student = studentRepository.findByUsername(username);
         if (student == null) {
             throw new NotFoundException("User not found in LeetDecode database");
@@ -423,7 +411,6 @@ public class LeetCodeClient {
     }
 
     public String isPOTDSolved(String username) {
-        username = normalizeUsername(username);
         QuestionTransferDTO dailypotd = dailyProblemHolder.getCurrentProblem();
         if (dailypotd == null) {
             try {

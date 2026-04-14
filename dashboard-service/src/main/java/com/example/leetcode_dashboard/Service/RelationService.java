@@ -9,6 +9,7 @@ import com.example.leetcode_dashboard.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,14 @@ public class RelationService {
         List<Student> output=knowsRelationRepository.findAllKnownByUsername(user);
         List<UserStatsResponse> results=new ArrayList<>();
         output.forEach(x->{
-           results.add(x.getUserStatsResponse());
+            if (x != null &&
+                    x.getUpdatedAt() != null &&
+                    x.getUpdatedAt().isBefore(LocalDateTime.now().minusMinutes(30))) {
+                UserStatsResponse student=leetCodeClient.getUserStats(x.getUsername());
+                results.add(student);
+            }else {
+                results.add(x.getUserStatsResponse());
+            }
         });
         return results;
     }
