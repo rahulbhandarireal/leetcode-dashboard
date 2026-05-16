@@ -1,0 +1,183 @@
+[
+  {
+    "sheetId": 1,
+    "name": "Top Interview DSA Sheet",
+    "description": "Curated interview preparation sheet",
+    "problems": [
+      {
+        "problemId": 1,
+        "title": "Two Sum",
+        "titleSlug": "two-sum",
+        "difficulty": "EASY",
+        "topic": "Arrays",
+        "position": 1
+      },
+      {
+        "problemId": 238,
+        "title": "Product of Array Except Self",
+        "titleSlug": "product-of-array-except-self",
+        "difficulty": "MEDIUM",
+        "topic": "Arrays",
+        "position": 2
+      },
+
+      {
+        "problemId": 242,
+        "title": "Valid Anagram",
+        "titleSlug": "valid-anagram",
+        "difficulty": "EASY",
+        "topic": "Strings",
+        "position": 3
+      },
+      {
+        "problemId": 3,
+        "title": "Longest Substring Without Repeating Characters",
+        "titleSlug":
+        "longest-substring-without-repeating-characters",
+        "difficulty": "MEDIUM",
+        "topic": "Strings",
+        "position": 4
+      },
+
+      {
+        "problemId": 206,
+        "title": "Reverse Linked List",
+        "titleSlug": "reverse-linked-list",
+        "difficulty": "EASY",
+        "topic": "Linked List",
+        "position": 5
+      },
+      {
+        "problemId": 2,
+        "title": "Add Two Numbers",
+        "titleSlug": "add-two-numbers",
+        "difficulty": "MEDIUM",
+        "topic": "Linked List",
+        "position": 6
+      },
+
+      {
+        "problemId": 20,
+        "title": "Valid Parentheses",
+        "titleSlug": "valid-parentheses",
+        "difficulty": "EASY",
+        "topic": "Stack",
+        "position": 7
+      },
+      {
+        "problemId": 739,
+        "title": "Daily Temperatures",
+        "titleSlug": "daily-temperatures",
+        "difficulty": "MEDIUM",
+        "topic": "Stack",
+        "position": 8
+      },
+
+      {
+        "problemId": 704,
+        "title": "Binary Search",
+        "titleSlug": "binary-search",
+        "difficulty": "EASY",
+        "topic": "Binary Search",
+        "position": 9
+      },
+      {
+        "problemId": 33,
+        "title": "Search in Rotated Sorted Array",
+        "titleSlug": "search-in-rotated-sorted-array",
+        "difficulty": "MEDIUM",
+        "topic": "Binary Search",
+        "position": 10
+      },
+
+      {
+        "problemId": 104,
+        "title": "Maximum Depth of Binary Tree",
+        "titleSlug": "maximum-depth-of-binary-tree",
+        "difficulty": "EASY",
+        "topic": "Trees",
+        "position": 11
+      },
+      {
+        "problemId": 102,
+        "title": "Binary Tree Level Order Traversal",
+        "titleSlug":
+        "binary-tree-level-order-traversal",
+        "difficulty": "MEDIUM",
+        "topic": "Trees",
+        "position": 12
+      },
+
+      {
+        "problemId": 235,
+        "title":
+        "Lowest Common Ancestor of a Binary Search Tree",
+        "titleSlug":
+        "lowest-common-ancestor-of-a-binary-search-tree",
+        "difficulty": "MEDIUM",
+        "topic": "BST",
+        "position": 13
+      },
+      {
+        "problemId": 98,
+        "title": "Validate Binary Search Tree",
+        "titleSlug": "validate-binary-search-tree",
+        "difficulty": "MEDIUM",
+        "topic": "BST",
+        "position": 14
+      },
+
+      {
+        "problemId": 215,
+        "title": "Kth Largest Element in an Array",
+        "titleSlug":
+        "kth-largest-element-in-an-array",
+        "difficulty": "MEDIUM",
+        "topic": "Heap",
+        "position": 15
+      },
+      {
+        "problemId": 347,
+        "title": "Top K Frequent Elements",
+        "titleSlug": "top-k-frequent-elements",
+        "difficulty": "MEDIUM",
+        "topic": "Heap",
+        "position": 16
+      },
+
+      {
+        "problemId": 70,
+        "title": "Climbing Stairs",
+        "titleSlug": "climbing-stairs",
+        "difficulty": "EASY",
+        "topic": "Dynamic Programming",
+        "position": 17
+      },
+      {
+        "problemId": 198,
+        "title": "House Robber",
+        "titleSlug": "house-robber",
+        "difficulty": "MEDIUM",
+        "topic": "Dynamic Programming",
+        "position": 18
+      },
+
+      {
+        "problemId": 200,
+        "title": "Number of Islands",
+        "titleSlug": "number-of-islands",
+        "difficulty": "MEDIUM",
+        "topic": "Graphs",
+        "position": 19
+      },
+      {
+        "problemId": 133,
+        "title": "Clone Graph",
+        "titleSlug": "clone-graph",
+        "difficulty": "MEDIUM",
+        "topic": "Graphs",
+        "position": 20
+      }
+    ]
+  }
+]
