@@ -1,0 +1,101 @@
+{
+  "sheetId": 4,
+  "name": "Blind 75",
+  "type": "sheet",
+  "description": "Classic Blind 75 LeetCode interview preparation list",
+  "problems": [
+    { "problemId": 1, "title": "Two Sum", "titleSlug": "two-sum", "difficulty": "EASY", "topic": "Array", "position": 1 },
+    { "problemId": 121, "title": "Best Time to Buy and Sell Stock", "titleSlug": "best-time-to-buy-and-sell-stock", "difficulty": "EASY", "topic": "Array", "position": 2 },
+    { "problemId": 217, "title": "Contains Duplicate", "titleSlug": "contains-duplicate", "difficulty": "EASY", "topic": "Array", "position": 3 },
+    { "problemId": 238, "title": "Product of Array Except Self", "titleSlug": "product-of-array-except-self", "difficulty": "MEDIUM", "topic": "Array", "position": 4 },
+    { "problemId": 53, "title": "Maximum Subarray", "titleSlug": "maximum-subarray", "difficulty": "MEDIUM", "topic": "Array", "position": 5 },
+    { "problemId": 152, "title": "Maximum Product Subarray", "titleSlug": "maximum-product-subarray", "difficulty": "MEDIUM", "topic": "Array", "position": 6 },
+    { "problemId": 153, "title": "Find Minimum in Rotated Sorted Array", "titleSlug": "find-minimum-in-rotated-sorted-array", "difficulty": "MEDIUM", "topic": "Binary Search", "position": 7 },
+    { "problemId": 33, "title": "Search in Rotated Sorted Array", "titleSlug": "search-in-rotated-sorted-array", "difficulty": "MEDIUM", "topic": "Binary Search", "position": 8 },
+    { "problemId": 704, "title": "Binary Search", "titleSlug": "binary-search", "difficulty": "EASY", "topic": "Binary Search", "position": 9 },
+    { "problemId": 3, "title": "Longest Substring Without Repeating Characters", "titleSlug": "longest-substring-without-repeating-characters", "difficulty": "MEDIUM", "topic": "String", "position": 10 },
+
+    { "problemId": 424, "title": "Longest Repeating Character Replacement", "titleSlug": "longest-repeating-character-replacement", "difficulty": "MEDIUM", "topic": "String", "position": 11 },
+    { "problemId": 20, "title": "Valid Parentheses", "titleSlug": "valid-parentheses", "difficulty": "EASY", "topic": "Stack", "position": 12 },
+    { "problemId": 155, "title": "Min Stack", "titleSlug": "min-stack", "difficulty": "MEDIUM", "topic": "Stack", "position": 13 },
+    { "problemId": 739, "title": "Daily Temperatures", "titleSlug": "daily-temperatures", "difficulty": "MEDIUM", "topic": "Stack", "position": 14 },
+
+    { "problemId": 206, "title": "Reverse Linked List", "titleSlug": "reverse-linked-list", "difficulty": "EASY", "topic": "Linked List", "position": 15 },
+    { "problemId": 21, "title": "Merge Two Sorted Lists", "titleSlug": "merge-two-sorted-lists", "difficulty": "EASY", "topic": "Linked List", "position": 16 },
+    { "problemId": 141, "title": "Linked List Cycle", "titleSlug": "linked-list-cycle", "difficulty": "EASY", "topic": "Linked List", "position": 17 },
+    { "problemId": 142, "title": "Linked List Cycle II", "titleSlug": "linked-list-cycle-ii", "difficulty": "MEDIUM", "topic": "Linked List", "position": 18 },
+    { "problemId": 19, "title": "Remove Nth Node From End of List", "titleSlug": "remove-nth-node-from-end-of-list", "difficulty": "MEDIUM", "topic": "Linked List", "position": 19 },
+
+    { "problemId": 226, "title": "Invert Binary Tree", "titleSlug": "invert-binary-tree", "difficulty": "EASY", "topic": "Tree", "position": 20 },
+    { "problemId": 104, "title": "Maximum Depth of Binary Tree", "titleSlug": "maximum-depth-of-binary-tree", "difficulty": "EASY", "topic": "Tree", "position": 21 },
+    { "problemId": 543, "title": "Diameter of Binary Tree", "titleSlug": "diameter-of-binary-tree", "difficulty": "EASY", "topic": "Tree", "position": 22 },
+    { "problemId": 102, "title": "Binary Tree Level Order Traversal", "titleSlug": "binary-tree-level-order-traversal", "difficulty": "MEDIUM", "topic": "Tree", "position": 23 },
+    { "problemId": 98, "title": "Validate Binary Search Tree", "titleSlug": "validate-binary-search-tree", "difficulty": "MEDIUM", "topic": "BST", "position": 24 },
+
+    { "problemId": 230, "title": "Kth Smallest Element in a BST", "titleSlug": "kth-smallest-element-in-a-bst", "difficulty": "MEDIUM", "topic": "BST", "position": 25 },
+    { "problemId": 200, "title": "Number of Islands", "titleSlug": "number-of-islands", "difficulty": "MEDIUM", "topic": "Graph", "position": 26 },
+    { "problemId": 133, "title": "Clone Graph", "titleSlug": "clone-graph", "difficulty": "MEDIUM", "topic": "Graph", "position": 27 },
+    { "problemId": 207, "title": "Course Schedule", "titleSlug": "course-schedule", "difficulty": "MEDIUM", "topic": "Graph", "position": 28 },
+
+    { "problemId": 70, "title": "Climbing Stairs", "titleSlug": "climbing-stairs", "difficulty": "EASY", "topic": "DP", "position": 29 },
+    { "problemId": 198, "title": "House Robber", "titleSlug": "house-robber", "difficulty": "MEDIUM", "topic": "DP", "position": 30 },
+    { "problemId": 322, "title": "Coin Change", "titleSlug": "coin-change", "difficulty": "MEDIUM", "topic": "DP", "position": 31 },
+    { "problemId": 300, "title": "Longest Increasing Subsequence", "titleSlug": "longest-increasing-subsequence", "difficulty": "MEDIUM", "topic": "DP", "position": 32 },
+    { "problemId": 139, "title": "Word Break", "titleSlug": "word-break", "difficulty": "MEDIUM", "topic": "DP", "position": 33 },
+
+    { "problemId": 78, "title": "Subsets", "titleSlug": "subsets", "difficulty": "MEDIUM", "topic": "Backtracking", "position": 34 },
+    { "problemId": 46, "title": "Permutations", "titleSlug": "permutations", "difficulty": "MEDIUM", "topic": "Backtracking", "position": 35 },
+    { "problemId": 39, "title": "Combination Sum", "titleSlug": "combination-sum", "difficulty": "MEDIUM", "topic": "Backtracking", "position": 36 },
+    { "problemId": 79, "title": "Word Search", "titleSlug": "word-search", "difficulty": "MEDIUM", "topic": "Backtracking", "position": 37 },
+
+    { "problemId": 15, "title": "3Sum", "titleSlug": "3sum", "difficulty": "MEDIUM", "topic": "Two Pointers", "position": 38 },
+    { "problemId": 11, "title": "Container With Most Water", "titleSlug": "container-with-most-water", "difficulty": "MEDIUM", "topic": "Two Pointers", "position": 39 },
+
+    { "problemId": 242, "title": "Valid Anagram", "titleSlug": "valid-anagram", "difficulty": "EASY", "topic": "Hashing", "position": 40 },
+    { "problemId": 49, "title": "Group Anagrams", "titleSlug": "group-anagrams", "difficulty": "MEDIUM", "topic": "Hashing", "position": 41 },
+    { "problemId": 128, "title": "Longest Consecutive Sequence", "titleSlug": "longest-consecutive-sequence", "difficulty": "MEDIUM", "topic": "Hashing", "position": 42 },
+
+    { "problemId": 23, "title": "Merge K Sorted Lists", "titleSlug": "merge-k-sorted-lists", "difficulty": "HARD", "topic": "Heap", "position": 43 },
+    { "problemId": 215, "title": "Kth Largest Element in Array", "titleSlug": "kth-largest-element-in-array", "difficulty": "MEDIUM", "topic": "Heap", "position": 44 },
+    { "problemId": 347, "title": "Top K Frequent Elements", "titleSlug": "top-k-frequent-elements", "difficulty": "MEDIUM", "topic": "Heap", "position": 45 },
+
+    { "problemId": 84, "title": "Largest Rectangle in Histogram", "titleSlug": "largest-rectangle-in-histogram", "difficulty": "HARD", "topic": "Stack", "position": 46 },
+    { "problemId": 42, "title": "Trapping Rain Water", "titleSlug": "trapping-rain-water", "difficulty": "HARD", "topic": "Two Pointers", "position": 47 },
+
+    { "problemId": 417, "title": "Pacific Atlantic Water Flow", "titleSlug": "pacific-atlantic-water-flow", "difficulty": "MEDIUM", "topic": "Graph", "position": 48 },
+    { "problemId": 994, "title": "Rotting Oranges", "titleSlug": "rotting-oranges", "difficulty": "MEDIUM", "topic": "Graph", "position": 49 },
+
+    { "problemId": 91, "title": "Decode Ways", "titleSlug": "decode-ways", "difficulty": "MEDIUM", "topic": "DP", "position": 50 },
+
+    { "problemId": 5, "title": "Longest Palindromic Substring", "titleSlug": "longest-palindromic-substring", "difficulty": "MEDIUM", "topic": "String", "position": 51 },
+    { "problemId": 72, "title": "Edit Distance", "titleSlug": "edit-distance", "difficulty": "HARD", "topic": "DP", "position": 52 },
+    { "problemId": 124, "title": "Binary Tree Maximum Path Sum", "titleSlug": "binary-tree-maximum-path-sum", "difficulty": "HARD", "topic": "Tree", "position": 53 },
+    { "problemId": 236, "title": "Lowest Common Ancestor of Binary Tree", "titleSlug": "lowest-common-ancestor-of-binary-tree", "difficulty": "MEDIUM", "topic": "Tree", "position": 54 },
+    { "problemId": 560, "title": "Subarray Sum Equals K", "titleSlug": "subarray-sum-equals-k", "difficulty": "MEDIUM", "topic": "Array", "position": 55 },
+    { "problemId": 75, "title": "Sort Colors", "titleSlug": "sort-colors", "difficulty": "MEDIUM", "topic": "Array", "position": 56 },
+    { "problemId": 56, "title": "Merge Intervals", "titleSlug": "merge-intervals", "difficulty": "MEDIUM", "topic": "Array", "position": 57 },
+    { "problemId": 57, "title": "Insert Interval", "titleSlug": "insert-interval", "difficulty": "MEDIUM", "topic": "Array", "position": 58 },
+    { "problemId": 295, "title": "Find Median from Data Stream", "titleSlug": "find-median-from-data-stream", "difficulty": "HARD", "topic": "Heap", "position": 59 },
+    { "problemId": 146, "title": "LRU Cache", "titleSlug": "lru-cache", "difficulty": "MEDIUM", "topic": "Design", "position": 60 },
+
+    { "problemId": 208, "title": "Implement Trie", "titleSlug": "implement-trie-prefix-tree", "difficulty": "MEDIUM", "topic": "Trie", "position": 61 },
+    { "problemId": 211, "title": "Design Add and Search Words", "titleSlug": "design-add-and-search-words-data-structure", "difficulty": "MEDIUM", "topic": "Trie", "position": 62 },
+    { "problemId": 212, "title": "Word Search II", "titleSlug": "word-search-ii", "difficulty": "HARD", "topic": "Trie", "position": 63 },
+
+    { "problemId": 84, "title": "Largest Rectangle in Histogram (revisit)", "titleSlug": "largest-rectangle-in-histogram", "difficulty": "HARD", "topic": "Stack", "position": 64 },
+    { "problemId": 739, "title": "Daily Temperatures (revisit)", "titleSlug": "daily-temperatures", "difficulty": "MEDIUM", "topic": "Stack", "position": 65 },
+    { "problemId": 150, "title": "Evaluate Reverse Polish Notation", "titleSlug": "evaluate-reverse-polish-notation", "difficulty": "MEDIUM", "topic": "Stack", "position": 66 },
+
+    { "problemId": 1020, "title": "Number of Enclaves", "titleSlug": "number-of-enclaves", "difficulty": "MEDIUM", "topic": "Graph", "position": 67 },
+    { "problemId": 130, "title": "Surrounded Regions", "titleSlug": "surrounded-regions", "difficulty": "MEDIUM", "topic": "Graph", "position": 68 },
+
+    { "problemId": 494, "title": "Target Sum", "titleSlug": "target-sum", "difficulty": "MEDIUM", "topic": "DP", "position": 69 },
+    { "problemId": 416, "title": "Partition Equal Subset Sum", "titleSlug": "partition-equal-subset-sum", "difficulty": "MEDIUM", "topic": "DP", "position": 70 },
+
+    { "problemId": 1143, "title": "Longest Common Subsequence", "titleSlug": "longest-common-subsequence", "difficulty": "MEDIUM", "topic": "DP", "position": 71 },
+    { "problemId": 312, "title": "Burst Balloons", "titleSlug": "burst-balloons", "difficulty": "HARD", "topic": "DP", "position": 72 },
+    { "problemId": 329, "title": "Longest Increasing Path in a Matrix", "titleSlug": "longest-increasing-path-in-a-matrix", "difficulty": "HARD", "topic": "Graph", "position": 73 },
+    { "problemId": 207, "title": "Course Schedule (revisit)", "titleSlug": "course-schedule", "difficulty": "MEDIUM", "topic": "Graph", "position": 74 },
+    { "problemId": 208, "title": "Implement Trie (revisit)", "titleSlug": "implement-trie-prefix-tree", "difficulty": "MEDIUM", "topic": "Trie", "position": 75 }
+  ]
+}

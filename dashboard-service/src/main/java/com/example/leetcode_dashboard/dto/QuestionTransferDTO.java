@@ -16,7 +16,6 @@ public class QuestionTransferDTO {
     private String title;
     private String titleSlug;
     private String difficulty;
-    private String content;
 
     private int totalAcceptedRaw;
     private int totalSubmissionRaw;

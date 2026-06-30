@@ -1,0 +1,73 @@
+{
+  "sheetId": 3,
+  "name": "NeetCode 150",
+  "type": "sheet",
+  "description": "Curated set of important coding interview problems (sample 50 problems)",
+  "problems": [
+    { "problemId": 1, "title": "Two Sum", "titleSlug": "two-sum", "difficulty": "EASY", "topic": "Arrays", "position": 1 },
+    { "problemId": 121, "title": "Best Time to Buy and Sell Stock", "titleSlug": "best-time-to-buy-and-sell-stock", "difficulty": "EASY", "topic": "Arrays", "position": 2 },
+    { "problemId": 238, "title": "Product of Array Except Self", "titleSlug": "product-of-array-except-self", "difficulty": "MEDIUM", "topic": "Arrays", "position": 3 },
+    { "problemId": 53, "title": "Maximum Subarray", "titleSlug": "maximum-subarray", "difficulty": "MEDIUM", "topic": "Arrays", "position": 4 },
+    { "problemId": 152, "title": "Maximum Product Subarray", "titleSlug": "maximum-product-subarray", "difficulty": "MEDIUM", "topic": "Arrays", "position": 5 },
+    { "problemId": 153, "title": "Find Minimum in Rotated Sorted Array", "titleSlug": "find-minimum-in-rotated-sorted-array", "difficulty": "MEDIUM", "topic": "Binary Search", "position": 6 },
+    { "problemId": 33, "title": "Search in Rotated Sorted Array", "titleSlug": "search-in-rotated-sorted-array", "difficulty": "MEDIUM", "topic": "Binary Search", "position": 7 },
+    { "problemId": 704, "title": "Binary Search", "titleSlug": "binary-search", "difficulty": "EASY", "topic": "Binary Search", "position": 8 },
+    { "problemId": 3, "title": "Longest Substring Without Repeating Characters", "titleSlug": "longest-substring-without-repeating-characters", "difficulty": "MEDIUM", "topic": "Strings", "position": 9 },
+    { "problemId": 424, "title": "Longest Repeating Character Replacement", "titleSlug": "longest-repeating-character-replacement", "difficulty": "MEDIUM", "topic": "Strings", "position": 10 },
+
+    { "problemId": 20, "title": "Valid Parentheses", "titleSlug": "valid-parentheses", "difficulty": "EASY", "topic": "Stack", "position": 11 },
+    { "problemId": 155, "title": "Min Stack", "titleSlug": "min-stack", "difficulty": "MEDIUM", "topic": "Stack", "position": 12 },
+    { "problemId": 739, "title": "Daily Temperatures", "titleSlug": "daily-temperatures", "difficulty": "MEDIUM", "topic": "Stack", "position": 13 },
+
+    { "problemId": 206, "title": "Reverse Linked List", "titleSlug": "reverse-linked-list", "difficulty": "EASY", "topic": "Linked List", "position": 14 },
+    { "problemId": 21, "title": "Merge Two Sorted Lists", "titleSlug": "merge-two-sorted-lists", "difficulty": "EASY", "topic": "Linked List", "position": 15 },
+    { "problemId": 19, "title": "Remove Nth Node From End of List", "titleSlug": "remove-nth-node-from-end-of-list", "difficulty": "MEDIUM", "topic": "Linked List", "position": 16 },
+
+    { "problemId": 141, "title": "Linked List Cycle", "titleSlug": "linked-list-cycle", "difficulty": "EASY", "topic": "Linked List", "position": 17 },
+    { "problemId": 142, "title": "Linked List Cycle II", "titleSlug": "linked-list-cycle-ii", "difficulty": "MEDIUM", "topic": "Linked List", "position": 18 },
+
+    { "problemId": 226, "title": "Invert Binary Tree", "titleSlug": "invert-binary-tree", "difficulty": "EASY", "topic": "Trees", "position": 19 },
+    { "problemId": 104, "title": "Maximum Depth of Binary Tree", "titleSlug": "maximum-depth-of-binary-tree", "difficulty": "EASY", "topic": "Trees", "position": 20 },
+    { "problemId": 102, "title": "Binary Tree Level Order Traversal", "titleSlug": "binary-tree-level-order-traversal", "difficulty": "MEDIUM", "topic": "Trees", "position": 21 },
+    { "problemId": 543, "title": "Diameter of Binary Tree", "titleSlug": "diameter-of-binary-tree", "difficulty": "EASY", "topic": "Trees", "position": 22 },
+
+    { "problemId": 98, "title": "Validate Binary Search Tree", "titleSlug": "validate-binary-search-tree", "difficulty": "MEDIUM", "topic": "BST", "position": 23 },
+    { "problemId": 230, "title": "Kth Smallest Element in a BST", "titleSlug": "kth-smallest-element-in-a-bst", "difficulty": "MEDIUM", "topic": "BST", "position": 24 },
+
+    { "problemId": 200, "title": "Number of Islands", "titleSlug": "number-of-islands", "difficulty": "MEDIUM", "topic": "Graphs", "position": 25 },
+    { "problemId": 133, "title": "Clone Graph", "titleSlug": "clone-graph", "difficulty": "MEDIUM", "topic": "Graphs", "position": 26 },
+    { "problemId": 207, "title": "Course Schedule", "titleSlug": "course-schedule", "difficulty": "MEDIUM", "topic": "Graphs", "position": 27 },
+
+    { "problemId": 70, "title": "Climbing Stairs", "titleSlug": "climbing-stairs", "difficulty": "EASY", "topic": "DP", "position": 28 },
+    { "problemId": 198, "title": "House Robber", "titleSlug": "house-robber", "difficulty": "MEDIUM", "topic": "DP", "position": 29 },
+    { "problemId": 322, "title": "Coin Change", "titleSlug": "coin-change", "difficulty": "MEDIUM", "topic": "DP", "position": 30 },
+    { "problemId": 300, "title": "Longest Increasing Subsequence", "titleSlug": "longest-increasing-subsequence", "difficulty": "MEDIUM", "topic": "DP", "position": 31 },
+
+    { "problemId": 15, "title": "3Sum", "titleSlug": "3sum", "difficulty": "MEDIUM", "topic": "Two Pointers", "position": 32 },
+    { "problemId": 11, "title": "Container With Most Water", "titleSlug": "container-with-most-water", "difficulty": "MEDIUM", "topic": "Two Pointers", "position": 33 },
+
+    { "problemId": 242, "title": "Valid Anagram", "titleSlug": "valid-anagram", "difficulty": "EASY", "topic": "Hashing", "position": 34 },
+    { "problemId": 49, "title": "Group Anagrams", "titleSlug": "group-anagrams", "difficulty": "MEDIUM", "topic": "Hashing", "position": 35 },
+    { "problemId": 128, "title": "Longest Consecutive Sequence", "titleSlug": "longest-consecutive-sequence", "difficulty": "MEDIUM", "topic": "Hashing", "position": 36 },
+
+    { "problemId": 23, "title": "Merge K Sorted Lists", "titleSlug": "merge-k-sorted-lists", "difficulty": "HARD", "topic": "Heap", "position": 37 },
+    { "problemId": 215, "title": "Kth Largest Element in an Array", "titleSlug": "kth-largest-element-in-an-array", "difficulty": "MEDIUM", "topic": "Heap", "position": 38 },
+    { "problemId": 347, "title": "Top K Frequent Elements", "titleSlug": "top-k-frequent-elements", "difficulty": "MEDIUM", "topic": "Heap", "position": 39 },
+
+    { "problemId": 78, "title": "Subsets", "titleSlug": "subsets", "difficulty": "MEDIUM", "topic": "Backtracking", "position": 40 },
+    { "problemId": 46, "title": "Permutations", "titleSlug": "permutations", "difficulty": "MEDIUM", "topic": "Backtracking", "position": 41 },
+    { "problemId": 39, "title": "Combination Sum", "titleSlug": "combination-sum", "difficulty": "MEDIUM", "topic": "Backtracking", "position": 42 },
+
+    { "problemId": 417, "title": "Pacific Atlantic Water Flow", "titleSlug": "pacific-atlantic-water-flow", "difficulty": "MEDIUM", "topic": "Graphs", "position": 43 },
+    { "problemId": 994, "title": "Rotting Oranges", "titleSlug": "rotting-oranges", "difficulty": "MEDIUM", "topic": "Graphs", "position": 44 },
+
+    { "problemId": 215, "title": "Kth Largest Element in an Array", "titleSlug": "kth-largest-element-in-an-array", "difficulty": "MEDIUM", "topic": "Heap", "position": 45 },
+    { "problemId": 295, "title": "Find Median from Data Stream", "titleSlug": "find-median-from-data-stream", "difficulty": "HARD", "topic": "Heap", "position": 46 },
+
+    { "problemId": 84, "title": "Largest Rectangle in Histogram", "titleSlug": "largest-rectangle-in-histogram", "difficulty": "HARD", "topic": "Stack", "position": 47 },
+    { "problemId": 42, "title": "Trapping Rain Water", "titleSlug": "trapping-rain-water", "difficulty": "HARD", "topic": "Two Pointers", "position": 48 },
+
+    { "problemId": 79, "title": "Word Search", "titleSlug": "word-search", "difficulty": "MEDIUM", "topic": "Backtracking", "position": 49 },
+    { "problemId": 91, "title": "Decode Ways", "titleSlug": "decode-ways", "difficulty": "MEDIUM", "topic": "DP", "position": 50 }
+  ]
+}

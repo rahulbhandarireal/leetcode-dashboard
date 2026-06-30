@@ -1,7 +1,7 @@
-[
-  {
+ {
     "sheetId": 1,
     "name": "Top Interview DSA Sheet",
+    "type": "sheet",
     "description": "Curated interview preparation sheet",
     "problems": [
       {
@@ -180,4 +180,3 @@
       }
     ]
   }
-]

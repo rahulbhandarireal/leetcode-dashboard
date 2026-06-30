@@ -1,0 +1,168 @@
+{
+  "sheetId": 7,
+  "name": "Trees",
+  "type": "topic",
+  "description": "Important binary tree and BST problems for interviews",
+  "problems": [
+    {
+      "problemId": 226,
+      "title": "Invert Binary Tree",
+      "titleSlug": "invert-binary-tree",
+      "difficulty": "EASY",
+      "topic": "Tree",
+      "position": 1
+    },
+    {
+      "problemId": 104,
+      "title": "Maximum Depth of Binary Tree",
+      "titleSlug": "maximum-depth-of-binary-tree",
+      "difficulty": "EASY",
+      "topic": "Tree",
+      "position": 2
+    },
+    {
+      "problemId": 543,
+      "title": "Diameter of Binary Tree",
+      "titleSlug": "diameter-of-binary-tree",
+      "difficulty": "EASY",
+      "topic": "Tree",
+      "position": 3
+    },
+    {
+      "problemId": 102,
+      "title": "Binary Tree Level Order Traversal",
+      "titleSlug": "binary-tree-level-order-traversal",
+      "difficulty": "MEDIUM",
+      "topic": "Tree",
+      "position": 4
+    },
+    {
+      "problemId": 98,
+      "title": "Validate Binary Search Tree",
+      "titleSlug": "validate-binary-search-tree",
+      "difficulty": "MEDIUM",
+      "topic": "BST",
+      "position": 5
+    },
+    {
+      "problemId": 230,
+      "title": "Kth Smallest Element in a BST",
+      "titleSlug": "kth-smallest-element-in-a-bst",
+      "difficulty": "MEDIUM",
+      "topic": "BST",
+      "position": 6
+    },
+    {
+      "problemId": 236,
+      "title": "Lowest Common Ancestor of Binary Tree",
+      "titleSlug": "lowest-common-ancestor-of-binary-tree",
+      "difficulty": "MEDIUM",
+      "topic": "Tree",
+      "position": 7
+    },
+    {
+      "problemId": 124,
+      "title": "Binary Tree Maximum Path Sum",
+      "titleSlug": "binary-tree-maximum-path-sum",
+      "difficulty": "HARD",
+      "topic": "Tree",
+      "position": 8
+    },
+    {
+      "problemId": 105,
+      "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+      "titleSlug": "construct-binary-tree-from-preorder-and-inorder-traversal",
+      "difficulty": "MEDIUM",
+      "topic": "Tree",
+      "position": 9
+    },
+    {
+      "problemId": 106,
+      "title": "Construct Binary Tree from Inorder and Postorder Traversal",
+      "titleSlug": "construct-binary-tree-from-inorder-and-postorder-traversal",
+      "difficulty": "MEDIUM",
+      "topic": "Tree",
+      "position": 10
+    },
+    {
+      "problemId": 114,
+      "title": "Flatten Binary Tree to Linked List",
+      "titleSlug": "flatten-binary-tree-to-linked-list",
+      "difficulty": "MEDIUM",
+      "topic": "Tree",
+      "position": 11
+    },
+    {
+      "problemId": 199,
+      "title": "Binary Tree Right Side View",
+      "titleSlug": "binary-tree-right-side-view",
+      "difficulty": "MEDIUM",
+      "topic": "Tree",
+      "position": 12
+    },
+    {
+      "problemId": 144,
+      "title": "Binary Tree Preorder Traversal",
+      "titleSlug": "binary-tree-preorder-traversal",
+      "difficulty": "EASY",
+      "topic": "Tree",
+      "position": 13
+    },
+    {
+      "problemId": 94,
+      "title": "Binary Tree Inorder Traversal",
+      "titleSlug": "binary-tree-inorder-traversal",
+      "difficulty": "EASY",
+      "topic": "Tree",
+      "position": 14
+    },
+    {
+      "problemId": 145,
+      "title": "Binary Tree Postorder Traversal",
+      "titleSlug": "binary-tree-postorder-traversal",
+      "difficulty": "EASY",
+      "topic": "Tree",
+      "position": 15
+    },
+    {
+      "problemId": 101,
+      "title": "Symmetric Tree",
+      "titleSlug": "symmetric-tree",
+      "difficulty": "EASY",
+      "topic": "Tree",
+      "position": 16
+    },
+    {
+      "problemId": 112,
+      "title": "Path Sum",
+      "titleSlug": "path-sum",
+      "difficulty": "EASY",
+      "topic": "Tree",
+      "position": 17
+    },
+    {
+      "problemId": 113,
+      "title": "Path Sum II",
+      "titleSlug": "path-sum-ii",
+      "difficulty": "MEDIUM",
+      "topic": "Tree",
+      "position": 18
+    },
+    {
+      "problemId": 297,
+      "title": "Serialize and Deserialize Binary Tree",
+      "titleSlug": "serialize-and-deserialize-binary-tree",
+      "difficulty": "HARD",
+      "topic": "Tree",
+      "position": 19
+    },
+    {
+      "problemId": 173,
+      "title": "Binary Search Tree Iterator",
+      "titleSlug": "binary-search-tree-iterator",
+      "difficulty": "MEDIUM",
+      "topic": "BST",
+      "position": 20
+    }
+  ]
+}

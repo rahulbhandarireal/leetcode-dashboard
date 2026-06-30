@@ -23,7 +23,7 @@ public class LeetcodeDashboardApplication implements CommandLineRunner {
 	DailyProblemHolder dailyProblemHolder;
 
 
-	 static void main(String[] args) {
+	public static void main(String[] args) {
 		SpringApplication.run(LeetcodeDashboardApplication.class, args);
 	}
 

@@ -5,6 +5,7 @@ import com.example.leetcode_dashboard.CustomException.UpstreamServiceException;
 import com.example.leetcode_dashboard.component.DailyProblemHolder;
 import com.example.leetcode_dashboard.dto.GraphQLRequest;
 import com.example.leetcode_dashboard.dto.QuestionTransferDTO;
+import com.example.leetcode_dashboard.dto.RatingDTO;
 import com.example.leetcode_dashboard.dto.UserStatsResponse;
 import com.example.leetcode_dashboard.model.LeetCodeProblem;
 import com.example.leetcode_dashboard.model.SolvedProblem;
@@ -24,12 +25,13 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple3;
 import reactor.util.retry.Retry;
-import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Year;
+import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.StreamSupport;
 
@@ -127,7 +129,7 @@ public class LeetCodeClient {
         return node.asInt();
     }
 
-    private Tuple3<JsonNode, JsonNode, JsonNode> leetcodeapiuserstats(String username){
+    private Tuple3<JsonNode, JsonNode, JsonNode> leetcodeapiuserstats(String username) {
         String userstatsquery = """
                          query userProfile($username: String!) {
                                      matchedUser(username: $username) {
@@ -188,7 +190,6 @@ public class LeetCodeClient {
         Mono<JsonNode> rankmono = Mono.fromCallable(() -> executeGraphQl(rankrequest, "userContestRankingInfo"));
 
 
-
         Tuple3<JsonNode, JsonNode, JsonNode> result =
                 Mono.zip(statsMono, stmono, rankmono).block();
         return result;
@@ -204,12 +205,11 @@ public class LeetCodeClient {
         }
 
 
-
-        Tuple3<JsonNode, JsonNode, JsonNode> result=leetcodeapiuserstats(username);
+        Tuple3<JsonNode, JsonNode, JsonNode> result = leetcodeapiuserstats(username);
 
         assert result != null;
 
-        Pair<Integer,String> contestnoAndRank = getRanking(result.getT3());
+        Pair<Integer, String> contestnoAndRank = getRanking(result.getT3());
         Pair<Integer, Integer> streakTotal = getStreakandTotal(result.getT2());
 
 
@@ -224,7 +224,7 @@ public class LeetCodeClient {
             int total = 0, easy = 0, medium = 0, hard = 0;
 
             for (JsonNode stat : statsArray) {
-                String difficulty = stat.path("difficulty").asString();
+                String difficulty = stat.path("difficulty").asText();
                 int count = stat.path("count").asInt();
 
                 switch (difficulty) {
@@ -247,7 +247,7 @@ public class LeetCodeClient {
             student.setStreak(streakTotal.a);
             student.setTotalActiveDays(streakTotal.b);
             student.setTotalSolved(total);
-            
+
             student = studentRepository.save(student);
             return student.getUserStatsResponse();
 
@@ -301,7 +301,6 @@ public class LeetCodeClient {
         if (student == null) {
             throw new NotFoundException("User not found in LeetDecode database");
         }
-        List<QuestionTransferDTO> recentProblems = new ArrayList<>();
         String query = """
                 query recentSubmissions($username: String!) {
                     recentSubmissionList(username: $username) {
@@ -330,7 +329,6 @@ public class LeetCodeClient {
                         title
                         titleSlug
                         difficulty
-                        content
                         stats
                         hints
                         topicTags {
@@ -340,13 +338,18 @@ public class LeetCodeClient {
                     }
                     """;
             Map<String, LeetCodeProblem> problemBySlug = new HashMap<>();
+            Set<String> processedAcceptedSlugs = new HashSet<>();
             for (JsonNode submission : userNode) {
-                String statusDisplay = submission.path("statusDisplay").asString();
+                String statusDisplay = submission.path("statusDisplay").asText();
                 if (!"Accepted".equals(statusDisplay)) {
                     continue;
                 }
 
-                String titleSlug = submission.path("titleSlug").asString();
+                String titleSlug = submission.path("titleSlug").asText();
+                if (!processedAcceptedSlugs.add(titleSlug)) {
+                    continue;
+                }
+
                 LeetCodeProblem problem = problemBySlug.get(titleSlug);
                 if (problem == null) {
                     problem = leetCodeProblemRepository.findProblemByTitleSlug(titleSlug);
@@ -359,22 +362,24 @@ public class LeetCodeClient {
                     JsonNode question = requireNode(node, "question", "Question details are missing for title slug: " + titleSlug);
                     problem = makeQuestion(question);
                     problem = leetCodeProblemRepository.save(problem);
-                    recentProblems.add(problem.getQuestion());
                 }
                 problemBySlug.put(titleSlug, problem);
-                LocalDateTime date=LocalDateTime.now();
-                Optional<SolvedProblem> osp = solvedProblemRepository.findByStudent_UsernameAndProblem_ProblemId(username,problem.getProblemId());
+                long timestamp = submission.path("timestamp").asLong(0);
+                LocalDateTime solvedAt = timestamp > 0
+                        ? LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC)
+                        : LocalDateTime.now();
+                Optional<SolvedProblem> osp = solvedProblemRepository.findByStudent_UsernameAndProblem_ProblemId(username, problem.getProblemId());
 
                 if (osp.isEmpty()) {
                     SolvedProblem sp = new SolvedProblem();
                     sp.setProblem(problem);
                     sp.setStudent(student);
-                    sp.setSolvedAt(date);
+                    sp.setSolvedAt(solvedAt);
                     student.getSolvedProblems().add(sp);
                     solvedProblemRepository.save(sp);
                 } else {
                     SolvedProblem sp = osp.get();
-                    sp.setSolvedAt(date);
+                    sp.setSolvedAt(solvedAt);
                     solvedProblemRepository.save(sp);
                 }
             }
@@ -383,7 +388,9 @@ public class LeetCodeClient {
         } catch (Exception e) {
             throw new RuntimeException("Failed to process recent solved problems for username: " + username, e);
         }
-        return recentProblems;
+        return solvedProblemRepository.findTop6ByStudent_UsernameOrderBySolvedAtDescIdDesc(username).stream()
+                .map(solvedProblem -> solvedProblem.getProblem().getQuestion())
+                .toList();
     }
 
     public QuestionTransferDTO getProblemoftheDay() {
@@ -438,7 +445,6 @@ public class LeetCodeClient {
                       title
                       titleSlug
                       difficulty
-                      content
                       stats
                       hints
                       topicTags {
@@ -465,12 +471,11 @@ public class LeetCodeClient {
             String title = requireNode(questionNode, "title", "Question title is missing").asText();
             String titleSlug = requireNode(questionNode, "titleSlug", "Question title slug is missing").asText();
             String difficulty = requireNode(questionNode, "difficulty", "Question difficulty is missing").asText();
-            String content = requireNode(questionNode, "content", "Question content is missing").asText();
             String statsString = requireNode(questionNode, "stats", "Question stats are missing").asText();
             JsonNode statsNode = objectMapper.readTree(statsString);
             int totalAcceptedraw = statsNode.path("totalAcceptedRaw").asInt(0);
             int totalSubmissionRaw = statsNode.path("totalSubmissionRaw").asInt(0);
-            String acceptanceRate = statsNode.path("acRate").asString("N/A");
+            String acceptanceRate = statsNode.path("acRate").asText("N/A");
             List<String> hint = new ArrayList<>();
             JsonNode hintslist = questionNode.get("hints");
             if (hintslist != null && hintslist.isArray()) {
@@ -490,7 +495,6 @@ public class LeetCodeClient {
             LeetCodeProblem response = new LeetCodeProblem();
             response.setTitleSlug(titleSlug);
             response.setTitle(title);
-            response.setContent(content);
             response.setDifficulty(difficulty);
             response.setProblemId(problemID);
             response.setTopicTags(topicTags);
@@ -506,4 +510,78 @@ public class LeetCodeClient {
     }
 
 
+    public QuestionTransferDTO getQuestionByID(String titleSlug) {
+        String questionquery = """
+                query getQuestion($titleSlug: String!) {
+                  question(titleSlug: $titleSlug) {
+                    questionFrontendId
+                    title
+                    titleSlug
+                    difficulty
+                    content
+                    stats
+                    hints
+                    topicTags {
+                      name
+                    }
+                  }
+                }
+                """;
+        GraphQLRequest recenreq = new GraphQLRequest(
+                questionquery,
+                Map.of("titleSlug", titleSlug)
+        );
+        JsonNode dataNode = executeGraphQl(recenreq, "getQuestionByFrontendId");
+        JsonNode questionNode = requireNode(dataNode, "question", "Question title is missing");
+        LeetCodeProblem leetCodeProblem = makeQuestion(questionNode);
+        return leetCodeProblem.getQuestion();
+    }
+
+    public List<RatingDTO> getRating(String username) {
+        String query = """
+                query userContestRankingInfo($username: String!) {
+                  userContestRankingHistory(username: $username) {
+                    attended
+                    trendDirection
+                    problemsSolved
+                    totalProblems
+                    finishTimeInSeconds
+                    rating
+                    ranking
+                
+                    contest {
+                      title
+                      startTime
+                    }
+                  }
+                }
+                """;
+
+        Map<String, Object> variables = Map.of(
+                "username", username
+        );
+        GraphQLRequest request = new GraphQLRequest(
+                query,
+                Map.of("username", username)
+        );
+        List<RatingDTO> ratings = new ArrayList<>();
+
+        try {
+            JsonNode dataNode = executeGraphQl(request, "userContestRankingInfo");
+            JsonNode ratingNode = requireNode(dataNode, "userContestRankingHistory", "Recent Ratings are missing");
+            for(JsonNode node : ratingNode) {
+                RatingDTO ratingDTO=new RatingDTO();
+                ratingDTO.setRating(node.get("rating").asText());
+                ratingDTO.setProblemsSolved(node.get("problemsSolved").asInt());
+                ratings.add(ratingDTO);
+            }
+        }catch (UpstreamServiceException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to process recent solved problems for username: " + username, e);
+        }
+
+        return ratings;
+
+    }
 }

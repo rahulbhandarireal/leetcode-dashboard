@@ -32,7 +32,7 @@ public class PotdScheduler {
             dailyProblemHolder.setCurrentProblem(questionTransferDTO);
             log.info("Fetched POTD Successfully");
         }catch (Exception e){
-            log.warn(STR."POTD Schedular failed to fetched, will retry again \{e.getMessage()}");
+            log.warn("POTD Schedular failed to fetched, will retry again {}", e.getMessage());
         }
     }
 }

@@ -1,0 +1,169 @@
+{
+  "sheetId": 5,
+  "name": "Array and Hashing",
+  "type": "topic",
+  "description": "Important interview problems focused on arrays and hashing techniques",
+  "problems": [
+    {
+      "problemId": 1,
+      "title": "Two Sum",
+      "titleSlug": "two-sum",
+      "difficulty": "EASY",
+      "topic": "Array",
+      "position": 1
+    },
+    {
+      "problemId": 217,
+      "title": "Contains Duplicate",
+      "titleSlug": "contains-duplicate",
+      "difficulty": "EASY",
+      "topic": "Array",
+      "position": 2
+    },
+    {
+      "problemId": 242,
+      "title": "Valid Anagram",
+      "titleSlug": "valid-anagram",
+      "difficulty": "EASY",
+      "topic": "Hashing",
+      "position": 3
+    },
+    {
+      "problemId": 49,
+      "title": "Group Anagrams",
+      "titleSlug": "group-anagrams",
+      "difficulty": "MEDIUM",
+      "topic": "Hashing",
+      "position": 4
+    },
+    {
+      "problemId": 238,
+      "title": "Product of Array Except Self",
+      "titleSlug": "product-of-array-except-self",
+      "difficulty": "MEDIUM",
+      "topic": "Array",
+      "position": 5
+    },
+    {
+      "problemId": 128,
+      "title": "Longest Consecutive Sequence",
+      "titleSlug": "longest-consecutive-sequence",
+      "difficulty": "MEDIUM",
+      "topic": "Hashing",
+      "position": 6
+    },
+    {
+      "problemId": 169,
+      "title": "Majority Element",
+      "titleSlug": "majority-element",
+      "difficulty": "EASY",
+      "topic": "Array",
+      "position": 7
+    },
+    {
+      "problemId": 268,
+      "title": "Missing Number",
+      "titleSlug": "missing-number",
+      "difficulty": "EASY",
+      "topic": "Array",
+      "position": 8
+    },
+    {
+      "problemId": 560,
+      "title": "Subarray Sum Equals K",
+      "titleSlug": "subarray-sum-equals-k",
+      "difficulty": "MEDIUM",
+      "topic": "Hashing",
+      "position": 9
+    },
+    {
+      "problemId": 303,
+      "title": "Range Sum Query - Immutable",
+      "titleSlug": "range-sum-query-immutable",
+      "difficulty": "EASY",
+      "topic": "Array",
+      "position": 10
+    },
+
+    {
+      "problemId": 304,
+      "title": "Range Sum Query 2D - Immutable",
+      "titleSlug": "range-sum-query-2d-immutable",
+      "difficulty": "MEDIUM",
+      "topic": "Array",
+      "position": 11
+    },
+    {
+      "problemId": 36,
+      "title": "Valid Sudoku",
+      "titleSlug": "valid-sudoku",
+      "difficulty": "MEDIUM",
+      "topic": "Hashing",
+      "position": 12
+    },
+    {
+      "problemId": 387,
+      "title": "First Unique Character in a String",
+      "titleSlug": "first-unique-character-in-a-string",
+      "difficulty": "EASY",
+      "topic": "Hashing",
+      "position": 13
+    },
+    {
+      "problemId": 383,
+      "title": "Ransom Note",
+      "titleSlug": "ransom-note",
+      "difficulty": "EASY",
+      "topic": "Hashing",
+      "position": 14
+    },
+    {
+      "problemId": 350,
+      "title": "Intersection of Two Arrays II",
+      "titleSlug": "intersection-of-two-arrays-ii",
+      "difficulty": "EASY",
+      "topic": "Array",
+      "position": 15
+    },
+    {
+      "problemId": 3501,
+      "title": "Intersection of Two Arrays",
+      "titleSlug": "intersection-of-two-arrays",
+      "difficulty": "EASY",
+      "topic": "Array",
+      "position": 16
+    },
+    {
+      "problemId": 448,
+      "title": "Find All Numbers Disappeared in an Array",
+      "titleSlug": "find-all-numbers-disappeared-in-an-array",
+      "difficulty": "EASY",
+      "topic": "Array",
+      "position": 17
+    },
+    {
+      "problemId": 442,
+      "title": "Find All Duplicates in an Array",
+      "titleSlug": "find-all-duplicates-in-an-array",
+      "difficulty": "MEDIUM",
+      "topic": "Array",
+      "position": 18
+    },
+    {
+      "problemId": 645,
+      "title": "Set Mismatch",
+      "titleSlug": "set-mismatch",
+      "difficulty": "EASY",
+      "topic": "Array",
+      "position": 19
+    },
+    {
+      "problemId": 41,
+      "title": "First Missing Positive",
+      "titleSlug": "first-missing-positive",
+      "difficulty": "HARD",
+      "topic": "Array",
+      "position": 20
+    }
+  ]
+}

@@ -17,5 +17,7 @@ public interface SolvedProblemRepository extends JpaRepository<SolvedProblem,Int
     @Query("select s from SolvedProblem s where s.student.username = ?1")
     List<SolvedProblem> findByUsername(String username);
 
+    List<SolvedProblem> findTop6ByStudent_UsernameOrderBySolvedAtDescIdDesc(String username);
+
 }
 

@@ -1,0 +1,168 @@
+{
+  "sheetId": 6,
+  "name": "Dynamic Programming",
+  "description": "Important DP problems for interview preparation",
+  "problems": [
+    {
+      "problemId": 70,
+      "title": "Climbing Stairs",
+      "titleSlug": "climbing-stairs",
+      "difficulty": "EASY",
+      "topic": "DP",
+      "position": 1
+    },
+    {
+      "problemId": 198,
+      "title": "House Robber",
+      "titleSlug": "house-robber",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 2
+    },
+    {
+      "problemId": 213,
+      "title": "House Robber II",
+      "titleSlug": "house-robber-ii",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 3
+    },
+    {
+      "problemId": 322,
+      "title": "Coin Change",
+      "titleSlug": "coin-change",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 4
+    },
+    {
+      "problemId": 300,
+      "title": "Longest Increasing Subsequence",
+      "titleSlug": "longest-increasing-subsequence",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 5
+    },
+    {
+      "problemId": 1143,
+      "title": "Longest Common Subsequence",
+      "titleSlug": "longest-common-subsequence",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 6
+    },
+    {
+      "problemId": 139,
+      "title": "Word Break",
+      "titleSlug": "word-break",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 7
+    },
+    {
+      "problemId": 91,
+      "title": "Decode Ways",
+      "titleSlug": "decode-ways",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 8
+    },
+    {
+      "problemId": 62,
+      "title": "Unique Paths",
+      "titleSlug": "unique-paths",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 9
+    },
+    {
+      "problemId": 63,
+      "title": "Unique Paths II",
+      "titleSlug": "unique-paths-ii",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 10
+    },
+
+    {
+      "problemId": 64,
+      "title": "Minimum Path Sum",
+      "titleSlug": "minimum-path-sum",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 11
+    },
+    {
+      "problemId": 152,
+      "title": "Maximum Product Subarray",
+      "titleSlug": "maximum-product-subarray",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 12
+    },
+    {
+      "problemId": 416,
+      "title": "Partition Equal Subset Sum",
+      "titleSlug": "partition-equal-subset-sum",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 13
+    },
+    {
+      "problemId": 494,
+      "title": "Target Sum",
+      "titleSlug": "target-sum",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 14
+    },
+    {
+      "problemId": 279,
+      "title": "Perfect Squares",
+      "titleSlug": "perfect-squares",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 15
+    },
+    {
+      "problemId": 221,
+      "title": "Maximal Square",
+      "titleSlug": "maximal-square",
+      "difficulty": "MEDIUM",
+      "topic": "DP",
+      "position": 16
+    },
+    {
+      "problemId": 72,
+      "title": "Edit Distance",
+      "titleSlug": "edit-distance",
+      "difficulty": "HARD",
+      "topic": "DP",
+      "position": 17
+    },
+    {
+      "problemId": 115,
+      "title": "Distinct Subsequences",
+      "titleSlug": "distinct-subsequences",
+      "difficulty": "HARD",
+      "topic": "DP",
+      "position": 18
+    },
+    {
+      "problemId": 312,
+      "title": "Burst Balloons",
+      "titleSlug": "burst-balloons",
+      "difficulty": "HARD",
+      "topic": "DP",
+      "position": 19
+    },
+    {
+      "problemId": 10,
+      "title": "Regular Expression Matching",
+      "titleSlug": "regular-expression-matching",
+      "difficulty": "HARD",
+      "topic": "DP",
+      "position": 20
+    }
+  ]
+}

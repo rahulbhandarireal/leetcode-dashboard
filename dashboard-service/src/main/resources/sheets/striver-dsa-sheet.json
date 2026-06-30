@@ -1,0 +1,160 @@
+{
+  "sheetId": 2,
+  "name": "Striver DSA Sheet",
+  "type": "sheet",
+  "description": "A curated list of important Striver A2Z DSA problems for interview preparation",
+  "problems": [
+    {
+      "problemId": 1,
+      "title": "Two Sum",
+      "titleSlug": "two-sum",
+      "difficulty": "EASY",
+      "topic": "Arrays",
+      "position": 1
+    },
+    {
+      "problemId": 88,
+      "title": "Merge Sorted Array",
+      "titleSlug": "merge-sorted-array",
+      "difficulty": "EASY",
+      "topic": "Arrays",
+      "position": 2
+    },
+
+    {
+      "problemId": 53,
+      "title": "Maximum Subarray",
+      "titleSlug": "maximum-subarray",
+      "difficulty": "MEDIUM",
+      "topic": "Arrays",
+      "position": 3
+    },
+    {
+      "problemId": 121,
+      "title": "Best Time to Buy and Sell Stock",
+      "titleSlug": "best-time-to-buy-and-sell-stock",
+      "difficulty": "EASY",
+      "topic": "Arrays",
+      "position": 4
+    },
+
+    {
+      "problemId": 217,
+      "title": "Contains Duplicate",
+      "titleSlug": "contains-duplicate",
+      "difficulty": "EASY",
+      "topic": "Hashing",
+      "position": 5
+    },
+    {
+      "problemId": 49,
+      "title": "Group Anagrams",
+      "titleSlug": "group-anagrams",
+      "difficulty": "MEDIUM",
+      "topic": "Hashing",
+      "position": 6
+    },
+
+    {
+      "problemId": 206,
+      "title": "Reverse Linked List",
+      "titleSlug": "reverse-linked-list",
+      "difficulty": "EASY",
+      "topic": "Linked List",
+      "position": 7
+    },
+    {
+      "problemId": 21,
+      "title": "Merge Two Sorted Lists",
+      "titleSlug": "merge-two-sorted-lists",
+      "difficulty": "EASY",
+      "topic": "Linked List",
+      "position": 8
+    },
+
+    {
+      "problemId": 20,
+      "title": "Valid Parentheses",
+      "titleSlug": "valid-parentheses",
+      "difficulty": "EASY",
+      "topic": "Stack",
+      "position": 9
+    },
+    {
+      "problemId": 155,
+      "title": "Min Stack",
+      "titleSlug": "min-stack",
+      "difficulty": "MEDIUM",
+      "topic": "Stack",
+      "position": 10
+    },
+
+    {
+      "problemId": 704,
+      "title": "Binary Search",
+      "titleSlug": "binary-search",
+      "difficulty": "EASY",
+      "topic": "Binary Search",
+      "position": 11
+    },
+    {
+      "problemId": 33,
+      "title": "Search in Rotated Sorted Array",
+      "titleSlug": "search-in-rotated-sorted-array",
+      "difficulty": "MEDIUM",
+      "topic": "Binary Search",
+      "position": 12
+    },
+
+    {
+      "problemId": 104,
+      "title": "Maximum Depth of Binary Tree",
+      "titleSlug": "maximum-depth-of-binary-tree",
+      "difficulty": "EASY",
+      "topic": "Trees",
+      "position": 13
+    },
+    {
+      "problemId": 102,
+      "title": "Binary Tree Level Order Traversal",
+      "titleSlug": "binary-tree-level-order-traversal",
+      "difficulty": "MEDIUM",
+      "topic": "Trees",
+      "position": 14
+    },
+
+    {
+      "problemId": 200,
+      "title": "Number of Islands",
+      "titleSlug": "number-of-islands",
+      "difficulty": "MEDIUM",
+      "topic": "Graphs",
+      "position": 15
+    },
+    {
+      "problemId": 133,
+      "title": "Clone Graph",
+      "titleSlug": "clone-graph",
+      "difficulty": "MEDIUM",
+      "topic": "Graphs",
+      "position": 16
+    },
+
+    {
+      "problemId": 70,
+      "title": "Climbing Stairs",
+      "titleSlug": "climbing-stairs",
+      "difficulty": "EASY",
+      "topic": "Dynamic Programming",
+      "position": 17
+    },
+    {
+      "problemId": 198,
+      "title": "House Robber",
+      "titleSlug": "house-robber",
+      "difficulty": "MEDIUM",
+      "topic": "Dynamic Programming",
+      "position": 18
+    }
+  ]
+}

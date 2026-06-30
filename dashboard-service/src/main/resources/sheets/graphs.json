@@ -1,0 +1,168 @@
+{
+  "sheetId": 9,
+  "name": "Graphs",
+  "type": "topic",
+  "description": "Important graph problems for interviews (BFS, DFS, Topological Sort, Shortest Path)",
+  "problems": [
+    {
+      "problemId": 200,
+      "title": "Number of Islands",
+      "titleSlug": "number-of-islands",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 1
+    },
+    {
+      "problemId": 133,
+      "title": "Clone Graph",
+      "titleSlug": "clone-graph",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 2
+    },
+    {
+      "problemId": 695,
+      "title": "Max Area of Island",
+      "titleSlug": "max-area-of-island",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 3
+    },
+    {
+      "problemId": 417,
+      "title": "Pacific Atlantic Water Flow",
+      "titleSlug": "pacific-atlantic-water-flow",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 4
+    },
+    {
+      "problemId": 130,
+      "title": "Surrounded Regions",
+      "titleSlug": "surrounded-regions",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 5
+    },
+    {
+      "problemId": 994,
+      "title": "Rotting Oranges",
+      "titleSlug": "rotting-oranges",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 6
+    },
+    {
+      "problemId": 207,
+      "title": "Course Schedule",
+      "titleSlug": "course-schedule",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 7
+    },
+    {
+      "problemId": 210,
+      "title": "Course Schedule II",
+      "titleSlug": "course-schedule-ii",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 8
+    },
+    {
+      "problemId": 743,
+      "title": "Network Delay Time",
+      "titleSlug": "network-delay-time",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 9
+    },
+    {
+      "problemId": 787,
+      "title": "Cheapest Flights Within K Stops",
+      "titleSlug": "cheapest-flights-within-k-stops",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 10
+    },
+    {
+      "problemId": 684,
+      "title": "Redundant Connection",
+      "titleSlug": "redundant-connection",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 11
+    },
+    {
+      "problemId": 261,
+      "title": "Graph Valid Tree",
+      "titleSlug": "graph-valid-tree",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 12
+    },
+    {
+      "problemId": 323,
+      "title": "Number of Connected Components in an Undirected Graph",
+      "titleSlug": "number-of-connected-components-in-an-undirected-graph",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 13
+    },
+    {
+      "problemId": 1192,
+      "title": "Critical Connections in a Network",
+      "titleSlug": "critical-connections-in-a-network",
+      "difficulty": "HARD",
+      "topic": "Graph",
+      "position": 14
+    },
+    {
+      "problemId": 332,
+      "title": "Reconstruct Itinerary",
+      "titleSlug": "reconstruct-itinerary",
+      "difficulty": "HARD",
+      "topic": "Graph",
+      "position": 15
+    },
+    {
+      "problemId": 802,
+      "title": "Find Eventual Safe States",
+      "titleSlug": "find-eventual-safe-states",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 16
+    },
+    {
+      "problemId": 886,
+      "title": "Possible Bipartition",
+      "titleSlug": "possible-bipartition",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 17
+    },
+    {
+      "problemId": 1135,
+      "title": "Connecting Cities With Minimum Cost",
+      "titleSlug": "connecting-cities-with-minimum-cost",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 18
+    },
+    {
+      "problemId": 778,
+      "title": "Swim in Rising Water",
+      "titleSlug": "swim-in-rising-water",
+      "difficulty": "HARD",
+      "topic": "Graph",
+      "position": 19
+    },
+    {
+      "problemId": 1514,
+      "title": "Path with Maximum Probability",
+      "titleSlug": "path-with-maximum-probability",
+      "difficulty": "MEDIUM",
+      "topic": "Graph",
+      "position": 20
+    }
+  ]
+}

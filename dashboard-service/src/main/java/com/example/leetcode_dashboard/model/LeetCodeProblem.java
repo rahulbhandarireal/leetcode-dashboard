@@ -1,6 +1,7 @@
 package com.example.leetcode_dashboard.model;
 
 import com.example.leetcode_dashboard.dto.QuestionTransferDTO;
+import com.example.leetcode_dashboard.configs.StringListJsonConverter;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,16 +28,22 @@ public class LeetCodeProblem {
     @Column(unique = true, nullable = false)
     private String titleSlug;
     private String difficulty;
-    @Lob
-    @Column(columnDefinition = "LONGTEXT")
-    private String content;
 
     private int totalAcceptedRaw;
     private int totalSubmissionRaw;
     private String acceptanceRate;
 
+    @Convert(converter = StringListJsonConverter.class)
+    @Column(columnDefinition = "TEXT")
     private List<String> hints;
+
+    @Convert(converter = StringListJsonConverter.class)
+    @Column(columnDefinition = "TEXT")
     private List<String> topicTags;
+
+    @OneToMany(mappedBy = "problem")
+    private List<SheetProblem> sheetProblems =
+            new ArrayList<>();
 
 //    removing the bidirectional mapping
 //    @OneToMany(mappedBy = "problem", cascade = CascadeType.ALL,
@@ -48,7 +55,6 @@ public class LeetCodeProblem {
                 .problemId(problemId)
                 .title(title)
                 .difficulty(difficulty)
-                .content(content)
                 .titleSlug(titleSlug)
                 .totalAcceptedRaw(totalAcceptedRaw)
                 .totalSubmissionRaw(totalSubmissionRaw)

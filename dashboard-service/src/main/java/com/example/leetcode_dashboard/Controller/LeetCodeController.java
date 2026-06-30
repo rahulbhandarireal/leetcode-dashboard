@@ -2,6 +2,7 @@ package com.example.leetcode_dashboard.Controller;
 
 import com.example.leetcode_dashboard.Service.LeetCodeClient;
 import com.example.leetcode_dashboard.dto.QuestionTransferDTO;
+import com.example.leetcode_dashboard.dto.RatingDTO;
 import com.example.leetcode_dashboard.dto.UserStatsResponse;
 import com.example.leetcode_dashboard.response.ApiResponse;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,6 @@ public class LeetCodeController {
     public LeetCodeController(LeetCodeClient leetCodeClient) {
         this.leetCodeClient = leetCodeClient;
     }
-
-
-
 
 
     @GetMapping("/stats/{username}")
@@ -41,21 +39,57 @@ public class LeetCodeController {
     }
 
     @GetMapping("/questionoftheday")
-        public QuestionTransferDTO getQuestionoftheday(){
-        return leetCodeClient.getProblemoftheDay();
+        public ApiResponse<QuestionTransferDTO> getQuestionoftheday(){
+        QuestionTransferDTO questionTransferDTO= leetCodeClient.getProblemoftheDay();
+        ApiResponse<QuestionTransferDTO> apiResponse=new ApiResponse<>();
+        apiResponse.setData(questionTransferDTO);
+        if(questionTransferDTO==null){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("Problem occurred");
+        }else {
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("Success");
+        }
+        return apiResponse;
+    }
+
+    @GetMapping("/getquestion/{titleSlug}")
+    public ApiResponse<QuestionTransferDTO> getQuestion(@PathVariable String titleSlug){
+        QuestionTransferDTO questionTransferDTO= leetCodeClient.getQuestionByID(titleSlug);
+        ApiResponse<QuestionTransferDTO> apiResponse=new ApiResponse<>();
+        apiResponse.setData(questionTransferDTO);
+        if(questionTransferDTO==null){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("Problem occurred");
+
+        }else{
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("Success");
+        }
+        return apiResponse;
     }
 
     @GetMapping("/recentsolvedproblem/{username}")
-    public List<QuestionTransferDTO>  getRecentSolvedProblem(@PathVariable String username){
+    public ApiResponse<List<QuestionTransferDTO>>  getRecentSolvedProblem(@PathVariable String username){
         username=normalizeUsername(username);
-        return leetCodeClient.getRecentSolvedProblems(username);
+       List<QuestionTransferDTO> qto=leetCodeClient.getRecentSolvedProblems(username);
+       ApiResponse<List<QuestionTransferDTO>> apiResponse=new ApiResponse<>();
+       apiResponse.setData(qto);
+       apiResponse.setSuccess(true);
+       apiResponse.setMessage("Success");
+       return apiResponse;
     }
 
 
     
     @GetMapping("/ispotdsolved/{username}")
-    public String isRecentSolvedProblem(@PathVariable String username){
-        return leetCodeClient.isPOTDSolved(username);
+    public ApiResponse<String> isRecentSolvedProblem(@PathVariable String username){
+        String ans= leetCodeClient.isPOTDSolved(username);
+        ApiResponse<String> apiResponse=new ApiResponse<>();
+        apiResponse.setData(ans);
+        apiResponse.setSuccess(true);
+        apiResponse.setMessage("Success");
+        return apiResponse;
     }
 
 
@@ -68,6 +102,21 @@ public class LeetCodeController {
             throw new IllegalArgumentException("Username must not be blank");
         }
         return normalizedUsername;
+    }
+
+    @GetMapping("/rating/{username}")
+    private ApiResponse<List<RatingDTO>> getrating(@PathVariable  String username){
+        List<RatingDTO> ratingDTOlist=leetCodeClient.getRating(username);
+        ApiResponse<List<RatingDTO>> apiResponse=new ApiResponse<>();
+        if (ratingDTOlist==null){
+            apiResponse.setSuccess(false);
+            apiResponse.setMessage("Problem occurred");
+        }else{
+            apiResponse.setSuccess(true);
+            apiResponse.setMessage("Success");
+            apiResponse.setData(ratingDTOlist);
+        }
+        return apiResponse;
     }
 
 
