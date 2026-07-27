@@ -11,7 +11,7 @@ import lombok.*;
 public class BattleResponse {
 
     String publicId;
-    Integer questionFrontendId;
+    Integer problemId;
 
 
 }

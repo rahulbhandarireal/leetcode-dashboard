@@ -3,9 +3,10 @@ package com.example.LeetDeCode_Battle_Module.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 
@@ -16,42 +17,38 @@ import java.util.UUID;
 @Setter
 @Builder
 public class Battle {
-
     @Id
     @GeneratedValue
     @UuidGenerator
     private UUID id;
 
-    private String publicId;
+    @Column(unique = true, nullable = false)
+    private String roomCode;
 
-    @NonNull
-    @Column(nullable = false)
-    String player1;
+    Integer problemId;
+    String topic;
+    String level;
+    String winnerId;
 
-    @NonNull
-    @Column(nullable = false)
-    String player2;
-
-    Integer  questionId;
-
-    @Enumerated(EnumType.STRING)
-    Topic  topic;
-
-    @Enumerated(EnumType.STRING)
-    BattleState battleState;
-
-    @Enumerated(EnumType.STRING)
-    JoinState  joinState;
-
-
-    String winner;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     @PrePersist
-    public void  generatePublicId(){
-        if(publicId == null) {
-            publicId = UUID.randomUUID().toString();
-        }
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "player_a_id", nullable = false)
+    private Userpoints playerA;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_b_id")
+    private Userpoints playerB;
+
+
+
 
 
 

@@ -28,6 +28,7 @@ public class Student {
     private int totalSolved;
     private int totalContestAttended;
 
+
     private int hard;
     private int easy;
     private int medium;

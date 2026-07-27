@@ -1,30 +1,27 @@
 package com.example.LeetDeCode_Battle_Module.DTO;
 
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import com.example.LeetDeCode_Battle_Module.model.BattleState;
-import com.example.LeetDeCode_Battle_Module.model.JoinState;
-import com.example.LeetDeCode_Battle_Module.model.Topic;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.PrePersist;
-import lombok.*;
-
-import java.util.UUID;
-
+/**
+ * Request body for POST /battle/create
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 public class BattleRequest {
 
-    @NonNull
-    String player1;
+    private String hostPlayerId;
 
-    @NonNull
-    String player2;
+    @NotBlank(message = "hostUsername is required")
+    private String hostUsername;
 
-    @Enumerated(EnumType.STRING)
-    Topic topic;
+    // Optional — if blank/null, ProblemService.getRandomProblem() will fetch
+    // a problem regardless of topic (see queryParamIfPresent in AiProblemClient)
+    private String topic;
+
+    // Optional — same as above, unconstrained level means "any difficulty"
+    private String level;
 }

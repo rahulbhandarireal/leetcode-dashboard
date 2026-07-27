@@ -1,17 +1,24 @@
 package com.example.LeetDeCode_Battle_Module.DTO;
 
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import lombok.*;
-
+/**
+ * Request body for PUT /battle/join
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 public class JoinBattleRequest {
 
-    @NonNull
-    String player2;
-    @NonNull
-    String publicId;
+    @NotBlank(message = "roomCode is required")
+    private String roomCode;
+
+    @NotBlank(message = "playerId is required")
+    private String playerId;
+
+    @NotBlank(message = "username is required")
+    private String username;
 }

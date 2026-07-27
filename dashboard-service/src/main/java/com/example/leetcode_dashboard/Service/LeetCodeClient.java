@@ -247,7 +247,6 @@ public class LeetCodeClient {
             student.setStreak(streakTotal.a);
             student.setTotalActiveDays(streakTotal.b);
             student.setTotalSolved(total);
-
             student = studentRepository.save(student);
             return student.getUserStatsResponse();
 
@@ -337,8 +336,9 @@ public class LeetCodeClient {
                       }
                     }
                     """;
-            Map<String, LeetCodeProblem> problemBySlug = new HashMap<>();
+            Map<Integer, LeetCodeProblem> problemById = new HashMap<>();
             Set<String> processedAcceptedSlugs = new HashSet<>();
+            Set<Integer> processedAcceptedProblemIds = new HashSet<>();
             for (JsonNode submission : userNode) {
                 String statusDisplay = submission.path("statusDisplay").asText();
                 if (!"Accepted".equals(statusDisplay)) {
@@ -350,25 +350,29 @@ public class LeetCodeClient {
                     continue;
                 }
 
-                LeetCodeProblem problem = problemBySlug.get(titleSlug);
-                if (problem == null) {
-                    problem = leetCodeProblemRepository.findProblemByTitleSlug(titleSlug);
+                GraphQLRequest recenreq = new GraphQLRequest(questiontopicquery,
+                        Map.of("titleSlug", titleSlug));
+                JsonNode node = executeGraphQl(recenreq, "questionDetails");
+                JsonNode question = requireNode(node, "question", "Question details are missing for title slug: " + titleSlug);
+                int problemId = requireInt(question, "questionFrontendId", "Question frontend id is missing for title slug: " + titleSlug);
+                if (!processedAcceptedProblemIds.add(problemId)) {
+                    continue;
                 }
 
+                LeetCodeProblem problem = problemById.get(problemId);
                 if (problem == null) {
-                    GraphQLRequest recenreq = new GraphQLRequest(questiontopicquery,
-                            Map.of("titleSlug", titleSlug));
-                    JsonNode node = executeGraphQl(recenreq, "questionDetails");
-                    JsonNode question = requireNode(node, "question", "Question details are missing for title slug: " + titleSlug);
-                    problem = makeQuestion(question);
-                    problem = leetCodeProblemRepository.save(problem);
+                    problem = leetCodeProblemRepository.findByProblemId(problemId);
+                    if (problem == null) {
+                        problem = makeQuestion(question);
+                        problem = leetCodeProblemRepository.save(problem);
+                    }
                 }
-                problemBySlug.put(titleSlug, problem);
+                problemById.put(problemId, problem);
                 long timestamp = submission.path("timestamp").asLong(0);
                 LocalDateTime solvedAt = timestamp > 0
                         ? LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC)
                         : LocalDateTime.now();
-                Optional<SolvedProblem> osp = solvedProblemRepository.findByStudent_UsernameAndProblem_ProblemId(username, problem.getProblemId());
+                Optional<SolvedProblem> osp = solvedProblemRepository.findByStudent_UsernameAndProblem_ProblemId(username, problemId);
 
                 if (osp.isEmpty()) {
                     SolvedProblem sp = new SolvedProblem();

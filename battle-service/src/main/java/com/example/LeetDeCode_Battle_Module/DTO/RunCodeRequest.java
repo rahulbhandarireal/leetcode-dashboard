@@ -12,7 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RunCodeRequest {
+    private String playerId;
+    private int problemId;
+    private String roomCode;
     private String language;
     private String code;
     private List<TestCaseInput> testCases;
+    private int negativeScore;
 }
