@@ -35,46 +35,57 @@ public class CodeExecutionController {
     }
     @PostMapping("/run/submit")
     public submitCodeDTO<List<TestCaseResult>> submitCode(@RequestBody RunCodeRequest request) {
-        List<TestCaseResult> resultList = codeExecutionService.runAllTestCases(request);
-        int totalScore = 1000 - request.getNegativeScore() * 10;
-        boolean allTestPassed = true;
         submitCodeDTO<List<TestCaseResult>> resultDTO = new submitCodeDTO<>();
-        resultDTO.setData(resultList);
-        for(int i=0;i<resultList.size();i++){
-            if(!resultList.get(i).isPassed()){
-                allTestPassed = false;
-                resultDTO.setFailedCase(i);
-                resultDTO.setErrorMessage(resultList.get(i).getError());
-                resultDTO.setAllPassed(false);
-                break;
-            }
-        }
+        try {
+            List<TestCaseResult> resultList = codeExecutionService.runAllTestCases(request);
+            int totalScore = 1000 - request.getNegativeScore() * 10;
+            boolean allTestPassed = true;
 
-
-        if(allTestPassed) {
-            resultDTO.setAllPassed(true);
-            BattleRoomView battleRoomView = roomService.
-                    submitPlayerCode(request.getRoomCode(), request.getPlayerId(), request.getLanguage(), request.getCode(), totalScore,allTestPassed);
-            if (battleRoomView.getWinnerPlayerId() != null  && battleRoomView.getWinnerPlayerId().equals(request.getPlayerId())) {
-                resultDTO.setWinner(true);
-
-            } else {
-                resultDTO.setWinner(false);
-
+            resultDTO.setData(resultList);
+            for (int i = 0; i < resultList.size(); i++) {
+                if (!resultList.get(i).isPassed()) {
+                    allTestPassed = false;
+                    resultDTO.setFailedCase(i);
+                    resultDTO.setErrorMessage(resultList.get(i).getError());
+                    resultDTO.setAllPassed(false);
+                    break;
+                }
             }
 
+
+            if (allTestPassed) {
+                resultDTO.setAllPassed(true);
+                BattleRoomView battleRoomView = roomService.
+                        submitPlayerCode(request.getRoomCode(), request.getPlayerId(), request.getLanguage(), request.getCode(), totalScore, allTestPassed);
+                if (battleRoomView.getWinnerPlayerId() != null && battleRoomView.getWinnerPlayerId().equals(request.getPlayerId())) {
+                    resultDTO.setWinner(true);
+
+                } else {
+                    resultDTO.setWinner(false);
+
+                }
+
+            }
+        } catch (Exception e) {
+            resultDTO.setErrorMessage(e.getMessage());
         }
         return  resultDTO;
     }
 
     @PostMapping("/run/forcefullsubmit")
     public ApiResponse<Integer> forcefullSubmitCode(@RequestBody RunCodeRequest request) {
-        BattleRoomView battleRoomView = roomService.
-                submitPlayerCode(request.getRoomCode(), request.getPlayerId(), request.getLanguage(), request.getCode(), -10,false);
         ApiResponse<Integer> response = new ApiResponse<>();
-        response.setStatus(true);
-        response.setMessage("You lost by forcefull submit");
-        response.setData(-10);
+        try {
+            BattleRoomView battleRoomView = roomService.
+                    submitPlayerCode(request.getRoomCode(), request.getPlayerId(), request.getLanguage(), request.getCode(), -10, false);
+
+            response.setStatus(true);
+            response.setMessage("You lost by forcefull submit");
+            response.setData(-10);
+        } catch (Exception e) {
+            response.setMessage(e.getMessage());
+            response.setStatus(false);
+        }
         return response;
     }
 }

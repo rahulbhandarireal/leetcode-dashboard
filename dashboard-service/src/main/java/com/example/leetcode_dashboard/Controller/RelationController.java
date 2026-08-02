@@ -20,16 +20,17 @@ public class RelationController {
 
 
     @PostMapping("/makerelation/{user}/{friend}")
-    public ApiResponse<String> addasknown(@PathVariable String user, @PathVariable  String friend){
-        boolean isdone=relationService.makeasfriend(user,friend);
-        ApiResponse<String> response = new ApiResponse<>();
-        response.setSuccess(isdone);
+    public ApiResponse<UserStatsResponse> addasknown(@PathVariable String user, @PathVariable  String friend){
 
-        if(isdone){
+        ApiResponse<UserStatsResponse> response = new ApiResponse<>();
+        try {
+            UserStatsResponse isdone = relationService.makeasfriend(user, friend);
             response.setMessage("success");
-        }else{
-            response.setData("No user found");
-            response.setMessage("No user exists "+friend);
+            response.setData(isdone);
+            response.setSuccess(true);
+        }catch (Exception e){
+            response.setMessage("fail");
+            response.setSuccess(false);
         }
         return response;
     }
@@ -50,5 +51,20 @@ public class RelationController {
         return response;
     }
 
+    @DeleteMapping("/deleteknown/{user}/{known}")
+    public ApiResponse<String> deleteKnown(@PathVariable String user, @PathVariable String known) {
+        boolean isdone = relationService.deleteKnown(user, known);
+        ApiResponse<String> response = new ApiResponse<>();
+        response.setSuccess(isdone);
+
+        if (isdone) {
+            response.setMessage("success");
+            response.setData("Deleted known relation");
+        } else {
+            response.setMessage("No relation found");
+            response.setData("No known relation exists between " + user + " and " + known);
+        }
+        return response;
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.LeetDeCode_Battle_Module.service;
 
 import com.example.LeetDeCode_Battle_Module.DTO.BattleHistoryDTO;
+import com.example.LeetDeCode_Battle_Module.exceptionhandler.ResourceNotFoundException;
 import com.example.LeetDeCode_Battle_Module.model.Battle;
 import com.example.LeetDeCode_Battle_Module.model.Userpoints;
 import com.example.LeetDeCode_Battle_Module.repository.BattleRepository;
@@ -25,7 +26,6 @@ public class UserPointService {
         if(userPointsRepository.findByUsername(username) != null) return false;
         Userpoints userpoints = new Userpoints();
         userpoints.setUsername(username);
-        userpoints.setDecodePoints(0);
         userPointsRepository.save(userpoints);
         return true;
     }
@@ -33,7 +33,6 @@ public class UserPointService {
          Userpoints userpoints = userPointsRepository.findByUsername(username);
          if(userpoints==null){
              userpoints = new Userpoints();
-             userpoints.setDecodePoints(0);
              userpoints.setUsername(username);
              userpoints=userPointsRepository.save(userpoints);
          }
@@ -41,6 +40,8 @@ public class UserPointService {
     }
     public Userpoints updateUserPoints(String username, int score){
          Userpoints userpoints = userPointsRepository.findByUsername(username);
+         if(userpoints==null){throw  new ResourceNotFoundException("No user points found for username: "+username);
+         }
          userpoints.setDecodePoints(score+userpoints.getDecodePoints());
          userPointsRepository.save(userpoints);
          return userpoints;

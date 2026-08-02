@@ -57,6 +57,12 @@ public class GlobalExceptionHandler  {
                 .status(HttpStatus.CONFLICT)
                 .body(Map.of("error",ex.getMessage())); // 409
     }
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<?> handleResourceNotFound(ResourceNotFoundException resourceNotFoundException) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(Map.of("error",resourceNotFoundException.getMessage()));
+    }
 
 
 

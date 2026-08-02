@@ -4,6 +4,7 @@ package com.example.LeetDeCode_Battle_Module.service;
 
 import com.example.LeetDeCode_Battle_Module.DTO.ProblemStatement;
 import com.example.LeetDeCode_Battle_Module.client.AiProblemClient;
+import com.example.LeetDeCode_Battle_Module.exceptionhandler.ResourceNotFoundException;
 import com.example.LeetDeCode_Battle_Module.util.RedisKeyUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -37,6 +38,7 @@ public class ProblemService {
     /** Used when a new room is created and needs a fresh problem assigned. */
     public ProblemStatement getRandomProblem(String topic, String level) {
         ProblemStatement fetched = aiProblemClient.fetchRandom(topic, level);
+        if(fetched == null) throw new ResourceNotFoundException("Not able to generate problem of "+topic+" "+level);
         String key = RedisKeyUtil.problemKey(fetched.getId());
         redisTemplate.opsForValue().set(key, fetched, PROBLEM_CACHE_TTL);
         return fetched;

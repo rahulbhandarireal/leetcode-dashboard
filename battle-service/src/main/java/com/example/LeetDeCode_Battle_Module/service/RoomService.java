@@ -2,6 +2,7 @@ package com.example.LeetDeCode_Battle_Module.service;
 
 import com.example.LeetDeCode_Battle_Module.DTO.BattleRoomView;
 import com.example.LeetDeCode_Battle_Module.DTO.ProblemStatement;
+import com.example.LeetDeCode_Battle_Module.exceptionhandler.ResourceNotFoundException;
 import com.example.LeetDeCode_Battle_Module.exceptionhandler.RoomFullException;
 import com.example.LeetDeCode_Battle_Module.model.Battle;
 import com.example.LeetDeCode_Battle_Module.model.BattleRoom;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.lang.module.ResolutionException;
 import java.security.SecureRandom;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -45,7 +47,6 @@ public class RoomService {
         if(userpoints==null){
             userpoints = new Userpoints();
             userpoints.setUsername(hostUsername);
-            userpoints.setDecodePoints(0);
             userpoints=userPointsRepository.save(userpoints);
         }
         BattleRoom room = BattleRoom.builder()
@@ -74,11 +75,11 @@ public class RoomService {
 
     public BattleRoomView joinRoom(String roomCode, String playerId, String username) {
         BattleRoom room = getRoomInternal(roomCode);
+
         Userpoints userpoints=userPointsRepository.findByUsername(username);
         if(userpoints==null){
             userpoints = new Userpoints();
             userpoints.setUsername(username);
-            userpoints.setDecodePoints(0);
             userpoints=userPointsRepository.save(userpoints);
         }
 
@@ -108,6 +109,7 @@ public class RoomService {
 
     public BattleRoomView submitPlayerCode(String roomCode, String playerId, String language, String finalCode,int score,boolean allpassed) {
         BattleRoom room = getRoomInternal(roomCode);
+
         if(room.getStatus() ==  BattleRoom.RoomStatus.COMPLETED){
             throw new RoomFullException("Room is already completed");
         }
@@ -170,7 +172,7 @@ public class RoomService {
     BattleRoom getRoomInternal(String roomCode) {
         BattleRoom room = (BattleRoom) redisTemplate.opsForValue().get(RedisKeyUtil.roomKey(roomCode));
         if (room == null) {
-            throw new IllegalStateException("Room not found: " + roomCode);
+            throw new ResourceNotFoundException("Room not found: " + roomCode);
         }
         return room;
     }

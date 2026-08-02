@@ -1,6 +1,7 @@
 package com.example.leetcode_dashboard.Service;
 
 
+import com.example.leetcode_dashboard.CustomException.NotFoundException;
 import com.example.leetcode_dashboard.dto.UserStatsResponse;
 import com.example.leetcode_dashboard.model.Knows;
 import com.example.leetcode_dashboard.model.Student;
@@ -8,6 +9,7 @@ import com.example.leetcode_dashboard.repository.KnowsRelationRepository;
 import com.example.leetcode_dashboard.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,13 +25,19 @@ public class RelationService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public boolean makeasfriend(String user, String friend) {
+    public UserStatsResponse makeasfriend(String user, String friend) {
+        UserStatsResponse a,b;
         try{
-            UserStatsResponse b=leetCodeClient.getUserStats(friend);
+             b=leetCodeClient.getUserStats(friend);
         }catch(Exception e){
-            return false;
+             throw new NotFoundException("No user found as username "+friend);
         }
-        UserStatsResponse a=leetCodeClient.getUserStats(user);
+        try{
+            a=leetCodeClient.getUserStats(user);
+        }catch(Exception e){
+            throw new NotFoundException("No user found as username "+user);
+        }
+
 
         Student knower = studentRepository.findByUsername(user);
         Student known = studentRepository.findByUsername(friend);
@@ -38,8 +46,7 @@ public class RelationService {
         k.setKnower(knower);
         k.setKnown(known);
         knowsRelationRepository.save(k);
-        return true;
-
+        return b;
     }
 
     public List<UserStatsResponse> findallKnown(String user){
@@ -56,6 +63,11 @@ public class RelationService {
             }
         });
         return results;
+    }
+
+    @Transactional
+    public boolean deleteKnown(String user, String known) {
+        return knowsRelationRepository.deleteByKnowerUsernameAndKnownUsername(user, known) > 0;
     }
 
 

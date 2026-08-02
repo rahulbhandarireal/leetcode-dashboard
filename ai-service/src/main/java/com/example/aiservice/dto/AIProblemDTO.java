@@ -53,5 +53,9 @@ public class AIProblemDTO {
                 .build();
     }
 
+    public static AIProblemDTO convertToAIDto(AiGeneratedProblem existingProblem) {
+        return AIProblemDTO.convertToAIDto(existingProblem);
+    }
+
 
 }

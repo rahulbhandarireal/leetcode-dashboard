@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.aiservice.dto.AIProblemDTO.convertToAIDto;
+
 @Service
 public class GeneratorQuestionServiceImpl implements GeneratorQuestionService {
 
@@ -35,18 +37,7 @@ public class GeneratorQuestionServiceImpl implements GeneratorQuestionService {
         this.openAiChatClient = openAiChatClient;
     }
 
-    AIProblemDTO convertToAIDto(AiGeneratedProblem existingProblem) {
-       return AIProblemDTO.builder()
-                .title(existingProblem.getTitle())
-                .topic(existingProblem.getTopic())
-                .level(existingProblem.getLevel())
-                .problemStatement(existingProblem.getProblemStatement())
-                .constraint(existingProblem.getConstraint())
-                .hints(existingProblem.getHints())
-                .sampleTestCases(existingProblem.getSampleTestCases())
-                .testcase(existingProblem.getTestcase())
-                .build();
-    }
+
 
     @Override
     public AIProblemDTO generateQuestion(String topic, String level) {

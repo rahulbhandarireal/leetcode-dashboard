@@ -14,5 +14,6 @@ public interface KnowsRelationRepository extends JpaRepository<Knows,Long> {
     @Query("SELECT k.known FROM Knows k WHERE k.knower.username = :username")
     List<Student> findAllKnownByUsername(String username);
 
+    long deleteByKnowerUsernameAndKnownUsername(String knowerUsername, String knownUsername);
 
 }

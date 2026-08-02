@@ -21,6 +21,20 @@ public class UserStatsResponse {
     private int streak;
     private int totalContestAttended;
 
+    public UserStatsResponse buildUser(Student student){
+        return UserStatsResponse.builder()
+                .rating(student.getRating())
+                .streak(student.getStreak())
+                .totalContestAttended(student.getTotalContestAttended())
+                .totalActiveDays(student.getTotalActiveDays())
+                .username(student.getUsername())
+                .totalSolved(student.getTotalSolved())
+                .mediumSolved(student.getMedium())
+                .hardSolved(student.getHard())
+                .easySolved(student.getEasy())
+                .build();
+    }
+
 
 
 

@@ -1,13 +1,13 @@
 package com.example.LeetDeCode_Battle_Module.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Userpoints {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,5 +17,10 @@ public class Userpoints {
     private String username;
 
     private int decodePoints;
+
+    @JsonIgnoreProperties
+    public Userpoints() {
+        decodePoints = 0;
+    }
 
 }

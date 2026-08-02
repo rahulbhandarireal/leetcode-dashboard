@@ -28,53 +28,72 @@ public class BattleController {
     @PostMapping("/create")
     public ApiResponse<BattleRoomView> createBattle(@Valid  @RequestBody BattleRequest request) {
         boolean a=userPointService.addUser(request.getHostUsername());
-        BattleRoomView battle = roomService.createRoom(
-                request.getHostPlayerId(),
-                request.getHostUsername(),
-                request.getTopic(),
-                request.getLevel()
-        );
-
         ApiResponse<BattleRoomView> response = new ApiResponse<>();
-        response.setData(battle);
-        response.setMessage("success");
-        response.setStatus(true);
+        try {
+            BattleRoomView battle = roomService.createRoom(
+                    request.getHostPlayerId(),
+                    request.getHostUsername(),
+                    request.getTopic(),
+                    request.getLevel()
+            );
+            response.setData(battle);
+            response.setMessage("success");
+            response.setStatus(true);
+        }catch (Exception e){
+            response.setMessage(e.getMessage());
+            response.setStatus(false);
+        }
         return response;
     }
 
     @PutMapping("/join")
     public ApiResponse<BattleRoomView> joinBattle(@Valid @RequestBody JoinBattleRequest request) {
-        boolean a=userPointService.addUser(request.getUsername());
-        BattleRoomView battle = roomService.joinRoom(
-                request.getRoomCode(),
-                request.getPlayerId(),
-                request.getUsername()
-        );
 
         ApiResponse<BattleRoomView> response = new ApiResponse<>();
-        response.setData(battle);
-        response.setMessage("success");
-        response.setStatus(true);
+        try {
+            boolean a=userPointService.addUser(request.getUsername());
+            BattleRoomView battle = roomService.joinRoom(
+                    request.getRoomCode(),
+                    request.getPlayerId(),
+                    request.getUsername()
+            );
+            response.setData(battle);
+            response.setMessage("success");
+            response.setStatus(true);
+        }catch (Exception e){
+               response.setMessage(e.getMessage());
+               response.setStatus(false);
+        }
         return response;
     }
 
     @GetMapping("/roomstatus/{roomCode}")
     public ApiResponse<BattleRoomView> roomstatus(@PathVariable String roomCode) {
-        BattleRoomView battle = roomService.getRoomView(roomCode);
         ApiResponse<BattleRoomView> response = new ApiResponse<>();
-        response.setData(battle);
-        response.setMessage("success");
-        response.setStatus(true);
+        try {
+            BattleRoomView battle = roomService.getRoomView(roomCode);
+            response.setData(battle);
+            response.setMessage("success");
+            response.setStatus(true);
+        } catch (Exception e) {
+            response.setMessage(e.getMessage());
+            response.setStatus(false);
+        }
         return response;
     }
 
     @GetMapping("/history")
     public ApiResponse<List<BattleHistoryDTO>> getbattleHistory(@RequestParam String hostUsername) {
-        List<BattleHistoryDTO> d=userPointService.getHistory(hostUsername);
         ApiResponse<List<BattleHistoryDTO>> response = new ApiResponse<>();
-        response.setData(d);
-        response.setMessage("success");
-        response.setStatus(true);
+        try {
+            List<BattleHistoryDTO> d=userPointService.getHistory(hostUsername);
+            response.setData(d);
+            response.setMessage("success");
+            response.setStatus(true);
+        }catch (Exception e){
+            response.setMessage(e.getMessage());
+            response.setStatus(false);
+        }
         return response;
     }
 
