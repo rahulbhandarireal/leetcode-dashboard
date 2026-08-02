@@ -4,7 +4,9 @@ import com.example.LeetDeCode_Battle_Module.enums.Language;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
-
+import jakarta.annotation.PostConstruct; // <-- ADD THIS
+import org.slf4j.Logger;                 // <-- ADD THIS
+import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -22,6 +24,7 @@ public class DockerRunnerService {
     private static final Logger log = LoggerFactory.getLogger(DockerRunnerService.class);
     private static final int TIMEOUT_SECONDS = 5;
 
+
     // Must match the host-side bind mount path in docker-compose.yml
     private static final Path SUBMISSIONS_BASE = Path.of("/battle-submissions");
 
@@ -33,28 +36,20 @@ public class DockerRunnerService {
         } catch (IOException e) {
             log.error("Failed to create submissions base directory", e);
         }
-
-        new Thread(() -> {
-            for (Language lang : Language.values()) {
-                try {
-                    log.info("Pre-pulling Docker image: {}", lang.getDockerImage());
-                    new ProcessBuilder("docker", "pull", lang.getDockerImage()).start().waitFor();
-                } catch (Exception e) {
-                    log.error("Failed to pre-warm image: {}", lang.getDockerImage(), e);
-                }
-            }
-        }).start();
     }
+
 
     public ExecutionResult run(Language language, String code, String input) {
         Path tempDir = null;
         String containerName = "exec-" + UUID.randomUUID();
 
         try {
+
             // Create temp dir INSIDE the shared bind-mounted path, not the JVM's default tmp
             tempDir = Files.createTempDirectory(SUBMISSIONS_BASE, "submission-");
             Path codeFile = tempDir.resolve(language.getFileName());
             Files.writeString(codeFile, code);
+
 
             tempDir.toFile().setReadable(true, false);
             tempDir.toFile().setWritable(true, false);
