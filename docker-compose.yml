@@ -59,6 +59,7 @@ services:
       context: .
       dockerfile: battle-service/Dockerfile
     container_name: battle-service
+    user: root  # Gives permission to interact with docker.sock
     ports:
       - "8082:8082"
     environment:
@@ -67,9 +68,9 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
       - AI_SERVICE_BASE_URL=http://ai-service:8085
       - ALLOWED_ORIGIN=${ALLOWED_ORIGIN:-http://localhost:*}
-      # Overrides for Redis (Optional, defaults to remote cloud URL in application.yml)
-      # - SPRING_DATA_REDIS_HOST=redis-16937.c90.us-east-1-3.ec2.cloud.redislabs.com
-      # - SPRING_DATA_REDIS_PASSWORD=diqsILCdxoqoxU6FRCLdiMpLcMTjUc3v
+    volumes:
+      # Mount EC2 host Docker socket so battle-service can spawn containers
+      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       mysql-db:
         condition: service_healthy
