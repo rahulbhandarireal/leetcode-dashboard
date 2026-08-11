@@ -53,9 +53,18 @@ public class AIProblemDTO {
                 .build();
     }
 
-    public static AIProblemDTO convertToAIDto(AiGeneratedProblem existingProblem) {
-        return AIProblemDTO.convertToAIDto(existingProblem);
+ public static AIProblemDTO convertToAIDto(AiGeneratedProblem existingProblem) {
+        return AIProblemDTO.builder()
+        .id(existingProblem.getId())
+        .title(existingProblem.getTitle())
+        .topic(existingProblem.getTopic())
+        .level(existingProblem.getLevel())
+        .problemStatement(existingProblem.getProblemStatement())
+        .constraint(existingProblem.getConstraint())
+        .hints(existingProblem.getHints())
+        .sampleTestCases(existingProblem.getSampleTestCases())
+        .testcase(existingProblem.getTestcase())
+        .build();
     }
-
 
 }
