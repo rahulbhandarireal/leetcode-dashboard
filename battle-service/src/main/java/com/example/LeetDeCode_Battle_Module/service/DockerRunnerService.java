@@ -22,6 +22,7 @@ public class DockerRunnerService {
     private static final Logger log = LoggerFactory.getLogger(DockerRunnerService.class);
     private static final int TIMEOUT_SECONDS = 5;
 
+
     // Must match the host-side bind mount path in docker-compose.yml
     private static final Path SUBMISSIONS_BASE = Path.of("/battle-submissions");
 
@@ -45,6 +46,9 @@ public class DockerRunnerService {
             }
         }).start();
     }
+
+    }
+
 
     public ExecutionResult run(Language language, String code, String input) {
         Path tempDir = null;
