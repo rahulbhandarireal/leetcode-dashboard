@@ -71,6 +71,7 @@ services:
       - SPRING_DATA_REDIS_HOST=redis-16937.c90.us-east-1-3.ec2.cloud.redislabs.com
       - SPRING_DATA_REDIS_PORT=16937
       - SPRING_DATA_REDIS_PASSWORD=${REDIS_PASSWORD}
+      - HOST_SUBMISSIONS_PATH=/home/ubuntu/battle-submissions
     volumes:
       # Mount EC2 host Docker socket so battle-service can spawn containers
       - /var/run/docker.sock:/var/run/docker.sock

@@ -53,7 +53,7 @@ public class AIProblemDTO {
                 .build();
     }
 
-    public static AIProblemDTO convertToAIDto(AiGeneratedProblem existingProblem) {
+ public static AIProblemDTO convertToAIDto(AiGeneratedProblem existingProblem) {
         return AIProblemDTO.builder()
         .id(existingProblem.getId())
         .title(existingProblem.getTitle())
@@ -66,6 +66,5 @@ public class AIProblemDTO {
         .testcase(existingProblem.getTestcase())
         .build();
     }
-
 
 }

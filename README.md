@@ -1,58 +1,98 @@
-# 🚀 LEETCODE DASHBOARD BACKEND  
+# LeetDecode – Distributed Competitive Coding & Analytics Platform
 
-### ⚡ Backend service for tracking coding progress & user data  
+LeetDecode is a multi-tiered microservices platform that helps competitive programmers track their LeetCode profiles, manage multi-sheet DSA practice schedules, and battle friends in a realtime, point-based two-player coding mode.
 
----
-
-## 👨‍💻 About  
-
-This backend powers my LeetCode Dashboard application, designed to track coding progress in a structured and meaningful way.  
-
-It handles user data, problem-solving history, and contest performance while integrating with LeetCode’s GraphQL API to fetch real-time stats.  
-
-The main goal of this project is to build a clean and scalable backend that focuses on consistency tracking, performance analysis, and useful features for coding interview preparation.  
+🔗 **Live Demo:** [http://50.16.61.197/](http://50.16.61.197/)
 
 ---
 
-## ✨ What You Can Do With This  
+## ✨ Features
 
-👉 Track your LeetCode contest rating and performance  
-👉 See which problems you solved and when you solved them  
-👉 Re-solving a problem updates your latest activity  
-👉 Maintain a clean history of your coding progress  
-👉 Add friends (limited to 6) and compare progress  
-👉 Use simple and fast APIs without unnecessary complexity  
+- **Realtime Two-Player Battle Mode** – Challenge another user to a live, point-based coding battle with instant score updates.
+- **LeetCode Profile Tracking** – Sync and monitor user LeetCode profiles and progress over time.
+- **Multi-Sheet DSA Practice Tracker** – Organize and track progress across multiple curated DSA practice sheets.
+- **Leaderboard & Stats** – Fast, cached leaderboard and user-stats views powered by a distributed Redis caching layer.
+- **Independently Deployable Microservices** – Each core capability runs as its own service for scalability and fault isolation.
 
----
+## 🏗️ Architecture
 
-## 🛠️ Tech Stack  
+LeetDecode is built as a set of independently deployable microservices rather than a single monolith:
 
-✔ Spring Boot  
-✔ Java  
-✔ JPA / Hibernate  
-✔ MySQL  
-✔ REST APIs  
-✔ LeetCode GraphQL  
+- **Battle Service** – Manages realtime two-player battle sessions and point-based scoring.
+- **Profile & Sheets Service** – Tracks user LeetCode profiles and multi-sheet DSA practice progress.
+- **Caching Layer (Redis)** – A distributed Redis cache sits in front of battle-view data, keeping scores and leaderboard updates fast and low-latency under concurrent load.
 
----
----
+```
+                ┌────────────────────┐
+                │     React UI       │
+                └─────────┬──────────┘
+                          │
+                ┌─────────▼──────────┐
+                │   Spring Boot APIs  │
+                │ (Battle · Profile   │
+                │  · DSA Sheets)      │
+                └───┬─────────────┬──┘
+                    │             │
+             ┌──────▼───┐   ┌─────▼──────┐
+             │  Redis    │   │  Database  │
+             │  Cache    │   │            │
+             └───────────┘   └────────────┘
+```
 
-## 📈 Future Work  
+## 🛠️ Tech Stack
 
-- 👥 Duel coding battle between friends (real-time competition)  -> real time + WebSocket
-- 🤖 Mock MCQ questions using Spring AI  
-- 📚 DSA sheets & roadmaps for structured preparation  
-- ⏰ Daily reminders for consistency  using notification service
-- 📊 Better analytics & progress tracking  
-- 🏆 Leaderboard system  
+| Layer | Technology |
+|---|---|
+| Frontend | React |
+| Backend | Spring Boot (Java), Microservices |
+| Caching | Redis |
+| Containerization | Docker |
+| Deployment | AWS EC2 |
 
----
----
+## ⚙️ Getting Started
 
-## 🙏 Thank You  
+### Prerequisites
+- Java 17+
+- Node.js 18+
+- Docker & Docker Compose
+- Redis
 
-Thanks for checking out this project.  
-If you found it useful or interesting, consider giving it a ⭐ on GitHub.  
+### Clone the repository
+```bash
+git clone https://github.com/<your-username>/leetdecode.git
+cd leetdecode
+```
 
-It really helps and motivates me to keep building more.  
+### Run with Docker Compose
+```bash
+docker-compose up --build
+```
 
+This spins up all backend microservices, the Redis cache, and the frontend together.
+
+### Run services individually (development)
+
+**Backend (each microservice)**
+```bash
+cd <service-directory>
+./mvnw spring-boot:run
+```
+
+**Frontend**
+```bash
+cd frontend
+npm install
+npm start
+```
+
+## 📈 Performance
+
+The distributed Redis caching layer for battle-view and leaderboard data significantly reduces average API response time under concurrent load, keeping live battle scores and standings responsive even with many simultaneous users.
+
+## 🚀 Deployment
+
+The platform is containerized with Docker and deployed on an AWS EC2 instance, with all microservices provisioned and run for a scalable, reproducible production environment.
+
+## 📄 License
+
+This project is licensed under the MIT License.

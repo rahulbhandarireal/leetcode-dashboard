@@ -5,10 +5,11 @@
 
 # Java / Maven
 **/target/
-
+.env
 # Logs
 *.log
 
 # OS files
 .DS_Store
-Thumbs.db
+Thumbs.db.env
+battle-service/.env
