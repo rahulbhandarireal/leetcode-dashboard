@@ -1,9 +1,21 @@
 package com.example.LeetDeCode_Battle_Module.enums;
 
 public enum Language {
-    PYTHON("python:3.11-alpine", "Main.py", "python3 /code/Main.py"),
-    JAVA("eclipse-temurin:17-alpine", "Main.java", "javac /code/Main.java -d /code && java -cp /code Main"),
-    CPP("frolvlad/alpine-gxx", "Main.cpp", "g++ /code/Main.cpp -O2 -o /code/a.out && /code/a.out");
+    PYTHON(
+            "python:3.11-alpine",
+            "Main.py",
+            "python3 /code/Main.py"
+    ),
+    JAVA(
+            "eclipse-temurin:17-alpine",
+            "Main.java",
+            "javac /code/Main.java -d /tmp && java -cp /tmp Main"
+    ),
+    CPP(
+            "frolvlad/alpine-gxx",
+            "Main.cpp",
+            "g++ /code/Main.cpp -O2 -o /tmp/a.out && /tmp/a.out"
+    );
 
     private final String dockerImage;
     private final String fileName;
