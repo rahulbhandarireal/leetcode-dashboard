@@ -44,7 +44,7 @@ LeetDecode is built as a set of independently deployable microservices rather th
 
 ### Clone the repository
 ```bash
-git clone https://github.com/<your-username>/leetdecode.git
+git clone https://github.com/rahulbhandarireal/leetcode-dashboard.git
 cd leetdecode
 ```
 
