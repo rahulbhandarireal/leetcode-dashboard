@@ -13,7 +13,7 @@ services:
     networks:
       - leetcode-network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pwhateveryouwant"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -72,10 +72,11 @@ services:
       - SPRING_DATA_REDIS_PORT=16937
       - SPRING_DATA_REDIS_PASSWORD=${REDIS_PASSWORD}
       - HOST_SUBMISSIONS_PATH=/home/ubuntu/battle-submissions
+      - CONTAINER_SUBMISSIONS_PATH=/root/battle-submissions
     volumes:
       # Mount EC2 host Docker socket so battle-service can spawn containers
       - /var/run/docker.sock:/var/run/docker.sock
-      - /home/ubuntu/battle-submissions:/battle-submissions
+      - /home/ubuntu/battle-submissions:/root/battle-submissions
     depends_on:
       mysql-db:
         condition: service_healthy

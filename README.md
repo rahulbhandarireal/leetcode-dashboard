@@ -22,22 +22,7 @@ LeetDecode is built as a set of independently deployable microservices rather th
 - **Profile & Sheets Service** – Tracks user LeetCode profiles and multi-sheet DSA practice progress.
 - **Caching Layer (Redis)** – A distributed Redis cache sits in front of battle-view data, keeping scores and leaderboard updates fast and low-latency under concurrent load.
 
-```
-                ┌────────────────────┐
-                │     React UI       │
-                └─────────┬──────────┘
-                          │
-                ┌─────────▼──────────┐
-                │   Spring Boot APIs  │
-                │ (Battle · Profile   │
-                │  · DSA Sheets)      │
-                └───┬─────────────┬──┘
-                    │             │
-             ┌──────▼───┐   ┌─────▼──────┐
-             │  Redis    │   │  Database  │
-             │  Cache    │   │            │
-             └───────────┘   └────────────┘
-```
+           ![Dashboard Preview](./images/LeetDecodedashboard.png)
 
 ## 🛠️ Tech Stack
 

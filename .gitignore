@@ -8,6 +8,7 @@
 .env
 # Logs
 *.log
+interview_prep.md
 
 # OS files
 .DS_Store

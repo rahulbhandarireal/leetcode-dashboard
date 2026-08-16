@@ -31,14 +31,21 @@ public class DockerRunnerService {
     private static final boolean IS_WINDOWS = System.getProperty("os.name").toLowerCase().contains("win");
     private final ExecutorService streamReadExecutor = Executors.newCachedThreadPool();
 
-    // Base directory on the host where code submissions will live
-    private static final Path SUBMISSIONS_BASE = Paths.get(
-            System.getProperty("user.home"), "battle-submissions"
-    );
+    private static final Path SUBMISSIONS_BASE;
+
+    static {
+        String containerPath = System.getenv("CONTAINER_SUBMISSIONS_PATH");
+        if (containerPath != null && !containerPath.isBlank()) {
+            SUBMISSIONS_BASE = Paths.get(containerPath);
+        } else {
+            SUBMISSIONS_BASE = Paths.get(System.getProperty("user.home"), "battle-submissions");
+        }
+    }
 
     @PostConstruct
     public void prewarmDockerImages() {
         try {
+            log.info("Initialized DockerRunnerService with SUBMISSIONS_BASE: {}", SUBMISSIONS_BASE);
             if (!Files.exists(SUBMISSIONS_BASE)) {
                 Files.createDirectories(SUBMISSIONS_BASE);
                 setPermissions(SUBMISSIONS_BASE);
@@ -63,6 +70,7 @@ public class DockerRunnerService {
 
             // Compute path to mount to Docker container
             String hostVolumePath = resolveHostVolumePath(tempDir);
+            log.info("Running container {} with hostVolumePath: {} and internal codeFile: {}", containerName, hostVolumePath, codeFile);
 
             List<String> command = new ArrayList<>(List.of(
                     "docker", "run", "--rm", "-i",
