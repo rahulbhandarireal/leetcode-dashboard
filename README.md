@@ -2,7 +2,7 @@
 
 LeetDecode is a multi-tiered microservices platform that helps competitive programmers track their LeetCode profiles, manage multi-sheet DSA practice schedules, and battle friends in a realtime, point-based two-player coding mode.
 
-🔗 **Live Demo:** [http://50.16.61.197/](http://50.16.61.197/)
+🔗 **Live Demo:** [http://13.60.190.141/](http://13.60.190.141/)
 
 ---
 
